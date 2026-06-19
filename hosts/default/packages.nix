@@ -7,6 +7,11 @@
     neovim
     curl
     wget
+    nwg-look
+    steam
+    vesktop
+    obsidian
+    bazaar
     cage
     firefox
     (inputs.mango.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (oldAttrs: {
