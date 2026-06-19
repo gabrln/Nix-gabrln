@@ -7,6 +7,10 @@
       name = "JetBrainsMono Nerd Font";
       size = 13.0;
     };
+    keybindings = {
+      "ctrl+insert" = "copy_to_clipboard";
+      "shift+insert" = "paste_from_clipboard";
+    };
     settings = {
       background_opacity = "0.9";
       window_padding_width = 14;

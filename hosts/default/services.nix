@@ -28,6 +28,28 @@
     };
   };
 
+  # Forçar escala do login manager (Noctalia Greeter) para 1.0
+  system.activationScripts.noctalia-greeter-scale = {
+    text = ''
+      ${pkgs.coreutils}/bin/mkdir -p /var/lib/noctalia-greeter
+      ${pkgs.coreutils}/bin/chown greeter:greeter /var/lib/noctalia-greeter
+      ${pkgs.coreutils}/bin/chmod 0755 /var/lib/noctalia-greeter
+      
+      conf_file="/var/lib/noctalia-greeter/greeter.conf"
+      if [ -f "$conf_file" ]; then
+        if ${pkgs.gnugrep}/bin/grep -q "^scale=" "$conf_file"; then
+          ${pkgs.gnused}/bin/sed -i 's/^scale=.*/scale=1.0/' "$conf_file"
+        else
+          echo "scale=1.0" >> "$conf_file"
+        fi
+      else
+        echo "scale=1.0" > "$conf_file"
+      fi
+      ${pkgs.coreutils}/bin/chown greeter:greeter "$conf_file"
+      ${pkgs.coreutils}/bin/chmod 0644 "$conf_file"
+    '';
+  };
+
   # Greetd Login Manager
   services.greetd = {
     enable = true;

@@ -10,7 +10,7 @@
   # Custom MangoWM config mapping all user bindings
   xdg.configFile."mango/config.conf".text = ''
     # Importar tema gerado pelo Noctalia
-    source-optional=~/.config/mango/noctalia.conf
+    source=~/.config/mango/noctalia.conf
 
     # Blur and shadows (Mango SceneFX settings for cleaner Noctalia surfaces)
     blur=1
@@ -38,6 +38,8 @@
     env=XKB_DEFAULT_LAYOUT,br
 
     # Input: Mouse
+    cursor_theme=Bibata-Modern-Classic
+    cursor_size=24
     mouse_accel_profile=1
     mouse_accel_speed=-0.4
 

@@ -88,12 +88,6 @@
       };
     };
     
-    theme = {
-      flavor = {
-        dark = "noctalia";
-        light = "noctalia";
-      };
-    };
     
     keymap = {
       manager = {
