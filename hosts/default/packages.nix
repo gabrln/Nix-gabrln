@@ -9,10 +9,10 @@
     wget
     cage
     firefox
-    inputs.mango.packages.${pkgs.system}.default # MangoWM/mangowc compositor
-    inputs.antigravity-nix.packages.${pkgs.system}.google-antigravity-no-fhs
-    inputs.antigravity-nix.packages.${pkgs.system}.google-antigravity-ide-no-fhs
-    inputs.antigravity-nix.packages.${pkgs.system}.google-antigravity-cli
+    inputs.mango.packages.${pkgs.stdenv.hostPlatform.system}.default # MangoWM/mangowc compositor
+    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-no-fhs
+    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-ide-no-fhs
+    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
     cliphist
     wl-clipboard
     libnotify

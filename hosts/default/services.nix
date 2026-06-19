@@ -20,7 +20,7 @@
   # Noctalia Greeter configuration via NixOS module
   programs.noctalia-greeter = {
     enable = true;
-    package = inputs.noctalia-greeter.packages.${pkgs.system}.default;
+    package = inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default;
     settings.cursor = {
       theme = "Bibata-Modern-Classic";
       size = 24;

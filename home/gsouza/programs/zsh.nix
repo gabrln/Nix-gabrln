@@ -96,7 +96,7 @@
       VIRTUAL_ENV_DISABLE_PROMPT = "1";
       FUNCNEST = "100";
     };
-    initExtra = ''
+    initContent = ''
       # =========================================================
       # Zsh Completion & Zstyle settings from vault
       # =========================================================

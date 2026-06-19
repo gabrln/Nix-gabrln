@@ -5,7 +5,8 @@
     enable = true;
     font = {
       name = "JetBrainsMono Nerd Font";
-      size = 13.0;
+      size = 11.0;
+      package = pkgs.nerd-fonts.jetbrains-mono;
     };
     keybindings = {
       "ctrl+insert" = "copy_to_clipboard";

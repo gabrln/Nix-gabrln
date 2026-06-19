@@ -3,11 +3,13 @@
 {
   programs.neovim = {
     enable = true;
+    withRuby = false;
+    withPython3 = false;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
 
-    extraLuaConfig = ''
+    initLua = ''
       -- Clipboard (Wayland via wl-clipboard)
       vim.opt.clipboard = "unnamedplus"
 

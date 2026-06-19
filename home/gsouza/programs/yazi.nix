@@ -3,6 +3,7 @@
 {
   programs.yazi = {
     enable = true;
+    shellWrapperName = "y";
     enableZshIntegration = true;
     
     settings = {
@@ -158,6 +159,7 @@
         keymap = [
           { on = "<Esc>"; run = "close"; desc = "Cancel"; }
           { on = "<Enter>"; run = "close --submit"; desc = "Confirm"; }
+          { on = "<Backspace>"; run = "backspace"; desc = "Backspace"; }
           { on = "<C-u>"; run = "kill_line"; desc = "Clear line"; }
           { on = "<C-w>"; run = "backward_kill_word"; desc = "Delete word"; }
           { on = "<Left>"; run = "move -1"; desc = "Left"; }

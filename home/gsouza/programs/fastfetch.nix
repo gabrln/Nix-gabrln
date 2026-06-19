@@ -1,77 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  programs.fastfetch = {
-    enable = true;
-    settings = {
-      "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
-      logo = {
-        source = "~/.config/fastfetch/logos/arch.png";
-        type = "kitty-direct";
-        height = 10;
-        width = 20;
-        padding = {
-          top = 1;
-        };
-      };
-      display = {
-        separator = " -> ";
-      };
-      modules = [
-        "break"
-        {
-          type = "title";
-          keyWidth = 10;
-          format = "         {6}{7}{8}";
-        }
-        {
-          type = "custom";
-          format = " ─────────────────────────── ";
-        }
-        {
-          type = "kernel";
-          key = " ";
-          keyColor = "yellow";
-        }
-        {
-          type = "wm";
-          key = " ";
-          keyColor = "blue";
-        }
-        {
-          type = "shell";
-          key = " ";
-          keyColor = "yellow";
-        }
-        {
-          type = "terminal";
-          key = " ";
-          keyColor = "blue";
-        }
-        {
-          type = "memory";
-          key = "󰍛 ";
-          keyColor = "magenta";
-          format = "{1} / {2}";
-        }
-        {
-          type = "uptime";
-          key = "󰔛 ";
-          keyColor = "green";
-        }
-        {
-          type = "custom";
-          format = " ─────────────────────────── ";
-        }
-        {
-          type = "custom";
-          format = "   \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m  \u001b[90m ";
-        }
-        "break"
-      ];
-    };
-  };
+  programs.fastfetch.enable = true;
 
-  # Map fastfetch PNG logo files
+  # Delega a renderização para o arquivo JSONC original não modificado pelo Nix
+  xdg.configFile."fastfetch/config.jsonc".source = ./../../../configs/fastfetch/config.jsonc;
   xdg.configFile."fastfetch/logos".source = ./../../../configs/fastfetch/logos;
+  xdg.configFile."fastfetch/scripts".source = ./../../../configs/fastfetch/scripts;
 }

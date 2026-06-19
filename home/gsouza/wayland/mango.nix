@@ -15,7 +15,7 @@
     # Blur and shadows (Mango SceneFX settings for cleaner Noctalia surfaces)
     blur=1
     blur_layer=1
-    blur_optimized=1
+    blur_optimized=0
     blur_params_num_passes=2
     blur_params_radius=5
     blur_params_noise=0.02
@@ -25,7 +25,7 @@
 
     # Animations
     animations=1
-    animation_duration=150
+    animation_duration=80
     animation_curve=0.25,0.1,0.25,1.0
 
     shadows=1
@@ -183,5 +183,8 @@
     bind=ALT,F4,spawn_shell,~/.config/mango/scripts/AltF4.sh
     bind=SUPER+SHIFT,b,spawn_shell,~/.config/mango/scripts/ToggleBlur.sh
     bind=SUPER+SHIFT,g,spawn_shell,~/.config/mango/scripts/ToggleGamemode.sh
+
+    # Dynamic settings overrides
+    source-optional=~/.config/mango/dyn_settings.conf
   '';
 }
