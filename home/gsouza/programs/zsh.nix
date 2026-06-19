@@ -10,7 +10,6 @@
     fzf
     zoxide
     starship
-    neovim
     kitty
     libnotify
     jq
