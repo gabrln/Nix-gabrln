@@ -63,6 +63,7 @@
     cursor_size=24
     mouse_accel_profile=1
     mouse_accel_speed=-0.4
+    numlockon=1
 
     # Autostart Services
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
