@@ -23,6 +23,10 @@
     blur_params_contrast=0.9
     blur_params_saturation=1.0
 
+    # Borders
+    borderpx=2
+    border_radius=10
+
     # Animations
     animations=1
     animation_duration_open=80
