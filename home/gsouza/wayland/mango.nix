@@ -59,19 +59,19 @@
     bind=SUPER,d,spawn_shell,noctalia msg panel-toggle launcher
     bind=SUPER,v,spawn_shell,noctalia msg panel-toggle clipboard
     bind=SUPER,p,spawn_shell,noctalia msg panel-toggle session
-    bind=SUPER SHIFT,n,spawn_shell,noctalia msg panel-toggle control-center notifications
-    bind=SUPER SHIFT,e,spawn_shell,noctalia msg settings-toggle
+    bind=SUPER+SHIFT,n,spawn_shell,noctalia msg panel-toggle control-center notifications
+    bind=SUPER+SHIFT,e,spawn_shell,noctalia msg settings-toggle
     bind=SUPER,n,spawn_shell,noctalia msg nightlight-toggle
     bind=SUPER,y,spawn_shell,noctalia msg caffeine-toggle
     bind=SUPER,w,spawn_shell,noctalia msg wallpaper-random
-    bind=SUPER SHIFT,t,spawn_shell,noctalia msg theme-mode-toggle
-    bind=CTRL ALT,l,spawn_shell,noctalia msg session lock
+    bind=SUPER+SHIFT,t,spawn_shell,noctalia msg theme-mode-toggle
+    bind=CTRL+ALT,l,spawn_shell,noctalia msg session lock
     bind=SUPER,F2,spawn_shell,noctalia msg mic-mute
 
     # Help Cheatsheets & Window Info
     bind=SUPER,h,spawn_shell,kitty --class floating-keyhints -e ~/.config/mango/scripts/KeyHints.sh
-    bind=SUPER SHIFT,h,spawn_shell,kitty --class floating-keyhints -e ~/.config/mango/scripts/AliasHints.sh
-    bind=SUPER SHIFT,d,spawn_shell,~/.config/mango/scripts/WindowInfo.sh
+    bind=SUPER+SHIFT,h,spawn_shell,kitty --class floating-keyhints -e ~/.config/mango/scripts/AliasHints.sh
+    bind=SUPER+SHIFT,d,spawn_shell,~/.config/mango/scripts/WindowInfo.sh
 
     # Hardware & Media Keys
     bind=NONE,XF86AudioRaiseVolume,spawn_shell,noctalia msg volume-up
@@ -88,12 +88,12 @@
 
     # Screenshots (via Noctalia IPC)
     bind=SUPER,Print,spawn_shell,noctalia msg screenshot-fullscreen
-    bind=SUPER SHIFT,Print,spawn_shell,noctalia msg screenshot-region
+    bind=SUPER+SHIFT,Print,spawn_shell,noctalia msg screenshot-region
     bind=ALT,Print,spawn_shell,noctalia msg screenshot-fullscreen pick
 
     # Window Management
     bind=SUPER,q,killclient,
-    bind=SUPER SHIFT,q,killclient,
+    bind=SUPER+SHIFT,q,killclient,
     bind=SUPER,f,togglefullscreen,
     bind=SUPER,m,togglemaximizescreen,
     bind=SUPER,space,togglefloating,
@@ -104,13 +104,13 @@
 
     # Scratchpads (Espelhados do hyprland.lua)
     # Named Scratchpads (Dropdown Terminal & System Monitor)
-    bind=SUPER SHIFT,Return,toggle_named_scratchpad,kitty-drop,none,kitty --class kitty-drop
+    bind=SUPER+SHIFT,Return,toggle_named_scratchpad,kitty-drop,none,kitty --class kitty-drop
     bind=SUPER,F1,toggle_named_scratchpad,btop-scratch,none,kitty --class btop-scratch -e btop
 
     # Standard Scratchpad (Equivalente ao special:magic)
     bind=SUPER,u,toggle_scratchpad
-    bind=SUPER SHIFT,u,minimized
-    bind=SUPER CTRL,u,restore_minimized
+    bind=SUPER+SHIFT,u,minimized
+    bind=SUPER+CTRL,u,restore_minimized
 
     # Foco direcional
     bind=SUPER,Left,focusdir,left
@@ -119,16 +119,16 @@
     bind=SUPER,Down,focusdir,down
 
     # Mover janela
-    bind=SUPER SHIFT,Left,exchange_client,left
-    bind=SUPER SHIFT,Right,exchange_client,right
-    bind=SUPER SHIFT,Up,exchange_client,up
-    bind=SUPER SHIFT,Down,exchange_client,down
+    bind=SUPER+SHIFT,Left,exchange_client,left
+    bind=SUPER+SHIFT,Right,exchange_client,right
+    bind=SUPER+SHIFT,Up,exchange_client,up
+    bind=SUPER+SHIFT,Down,exchange_client,down
 
     # Redimensionar janela
-    bind=CTRL ALT,Left,resizewin,-50,+0
-    bind=CTRL ALT,Right,resizewin,+50,+0
-    bind=CTRL ALT,Up,resizewin,+0,-50
-    bind=CTRL ALT,Down,resizewin,+0,+50
+    bind=CTRL+ALT,Left,resizewin,-50,+0
+    bind=CTRL+ALT,Right,resizewin,+50,+0
+    bind=CTRL+ALT,Up,resizewin,+0,-50
+    bind=CTRL+ALT,Down,resizewin,+0,+50
 
     # Scroller Layout Settings
     bind=ALT,e,set_proportion,1.0
@@ -153,26 +153,26 @@
     bind=SUPER,0,view,10,0
 
     # Moving clients to tags
-    bind=SUPER SHIFT,1,tag,1,0
-    bind=SUPER SHIFT,2,tag,2,0
-    bind=SUPER SHIFT,3,tag,3,0
-    bind=SUPER SHIFT,4,tag,4,0
-    bind=SUPER SHIFT,5,tag,5,0
-    bind=SUPER SHIFT,6,tag,6,0
-    bind=SUPER SHIFT,7,tag,7,0
-    bind=SUPER SHIFT,8,tag,8,0
-    bind=SUPER SHIFT,9,tag,9,0
-    bind=SUPER SHIFT,0,tag,10,0
+    bind=SUPER+SHIFT,1,tag,1,0
+    bind=SUPER+SHIFT,2,tag,2,0
+    bind=SUPER+SHIFT,3,tag,3,0
+    bind=SUPER+SHIFT,4,tag,4,0
+    bind=SUPER+SHIFT,5,tag,5,0
+    bind=SUPER+SHIFT,6,tag,6,0
+    bind=SUPER+SHIFT,7,tag,7,0
+    bind=SUPER+SHIFT,8,tag,8,0
+    bind=SUPER+SHIFT,9,tag,9,0
+    bind=SUPER+SHIFT,0,tag,10,0
 
     # Overview & Window Switching
     bind=ALT,Tab,toggleoverview,
     bind=SUPER,Tab,viewtoright,0
-    bind=SUPER SHIFT,Tab,viewtoleft,0
-    bind=CTRL ALT,Delete,quit,
+    bind=SUPER+SHIFT,Tab,viewtoleft,0
+    bind=CTRL+ALT,Delete,quit,
 
     # Scripts Auxiliares
     bind=ALT,F4,spawn_shell,~/.config/mango/scripts/AltF4.sh
-    bind=SUPER SHIFT,b,spawn_shell,~/.config/mango/scripts/ToggleBlur.sh
-    bind=SUPER SHIFT,g,spawn_shell,~/.config/mango/scripts/ToggleGamemode.sh
+    bind=SUPER+SHIFT,b,spawn_shell,~/.config/mango/scripts/ToggleBlur.sh
+    bind=SUPER+SHIFT,g,spawn_shell,~/.config/mango/scripts/ToggleGamemode.sh
   '';
 }
