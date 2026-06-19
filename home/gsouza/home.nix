@@ -13,7 +13,7 @@
   home.homeDirectory = "/home/gsouza";
   home.stateVersion = "24.05";
 
-  # Tema do cursor do usuário
+  # User cursor theme
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
@@ -22,7 +22,7 @@
     package = pkgs.bibata-cursors;
   };
 
-  # Associações de arquivos padrão (MIME Types) importadas das notas do Vault
+  # Default file associations (MIME Types) imported from Vault notes
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {

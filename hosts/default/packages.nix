@@ -19,28 +19,25 @@
     papirus-icon-theme
     bibata-cursors
     
-    # Dependências do Noctalia e temas
+    # Noctalia and theme dependencies
     brightnessctl
     grim
     slurp
     adw-gtk3
     kdePackages.qt6ct
-    libsForQt5.qtstyleplugin-kvantum
-    qt6Packages.qtstyleplugin-kvantum
     xdg-desktop-portal-gtk
     libqalculate
     btop
     
-    # Ferramentas básicas de compressão/extração
+    # Basic compression/extraction utilities
     zip
     unzip
     p7zip
     unrar
   ];
 
-  # Variáveis de sessão para temas Qt
+  # Session variables for Qt themes
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt6ct";
-    QT_STYLE_OVERRIDE = "kvantum";
   };
 }

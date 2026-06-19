@@ -28,7 +28,7 @@
     };
   };
 
-  # Forçar escala do login manager (Noctalia Greeter) para 1.0
+  # Force login manager (Noctalia Greeter) scale to 1.0
   system.activationScripts.noctalia-greeter-scale = {
     text = ''
       ${pkgs.coreutils}/bin/mkdir -p /var/lib/noctalia-greeter
@@ -60,10 +60,10 @@
     };
   };
 
-  # Desbloqueio automático do GNOME Keyring no login via greetd
+  # Auto-unlock GNOME Keyring on login via greetd
   security.pam.services.greetd.enableGnomeKeyring = true;
 
-  # XDG Portals (necessário para launcher do Noctalia)
+  # XDG Portals (required for Noctalia launcher)
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];

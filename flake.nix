@@ -1,5 +1,5 @@
 {
-  description = "Configuração do NixOS de Gabriel com MangoWM e Noctalia";
+  description = "Gabriel's NixOS config with MangoWM and Noctalia";
 
   nixConfig = {
     extra-substituters = [ "https://noctalia.cachix.org" ];

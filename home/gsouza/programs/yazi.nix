@@ -169,6 +169,6 @@
     };
   };
 
-  # Mapear pasta flavors para o tema noctalia.yazi funcionar
+  # Map flavors directory for noctalia.yazi theme
   xdg.configFile."yazi/flavors".source = ./../../../configs/yazi/flavors;
 }

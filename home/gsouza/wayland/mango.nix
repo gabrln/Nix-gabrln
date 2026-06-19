@@ -1,15 +1,15 @@
 { config, pkgs, ... }:
 
 {
-  # Habilitar MangoWM
+  # Enable MangoWM
   wayland.windowManager.mango.enable = true;
 
-  # Mapear diretório de scripts do MangoWM
+  # Map MangoWM scripts directory
   xdg.configFile."mango/scripts".source = ./../../../configs/mango/scripts;
 
   # Custom MangoWM config mapping all user bindings
   xdg.configFile."mango/config.conf".text = ''
-    # Importar tema gerado pelo Noctalia
+    # Import Noctalia-generated theme
     source=~/.config/mango/noctalia.conf
 
     # Blur and shadows (Mango SceneFX settings for cleaner Noctalia surfaces)
@@ -104,29 +104,29 @@
     bind=SUPER,j,focusstack,next
     bind=SUPER,k,focusstack,prev
 
-    # Scratchpads (Espelhados do hyprland.lua)
+    # Scratchpads (Mirrored from hyprland.lua)
     # Named Scratchpads (Dropdown Terminal & System Monitor)
     bind=SUPER+SHIFT,Return,toggle_named_scratchpad,kitty-drop,none,kitty --class kitty-drop
     bind=SUPER,F1,toggle_named_scratchpad,btop-scratch,none,kitty --class btop-scratch -e btop
 
-    # Standard Scratchpad (Equivalente ao special:magic)
+    # Standard Scratchpad (Equivalent to special:magic)
     bind=SUPER,u,toggle_scratchpad
     bind=SUPER+SHIFT,u,minimized
     bind=SUPER+CTRL,u,restore_minimized
 
-    # Foco direcional
+    # Directional focus
     bind=SUPER,Left,focusdir,left
     bind=SUPER,Right,focusdir,right
     bind=SUPER,Up,focusdir,up
     bind=SUPER,Down,focusdir,down
 
-    # Mover janela
+    # Move window
     bind=SUPER+SHIFT,Left,exchange_client,left
     bind=SUPER+SHIFT,Right,exchange_client,right
     bind=SUPER+SHIFT,Up,exchange_client,up
     bind=SUPER+SHIFT,Down,exchange_client,down
 
-    # Redimensionar janela
+    # Resize window
     bind=CTRL+ALT,Left,resizewin,-50,+0
     bind=CTRL+ALT,Right,resizewin,+50,+0
     bind=CTRL+ALT,Up,resizewin,+0,-50
@@ -172,7 +172,7 @@
     bind=SUPER+SHIFT,Tab,viewtoleft,0
     bind=CTRL+ALT,Delete,quit,
 
-    # Scripts Auxiliares
+    # Auxiliary scripts
     bind=ALT,F4,spawn_shell,~/.config/mango/scripts/AltF4.sh
     bind=SUPER+SHIFT,b,spawn_shell,~/.config/mango/scripts/ToggleBlur.sh
     bind=SUPER+SHIFT,g,spawn_shell,~/.config/mango/scripts/ToggleGamemode.sh

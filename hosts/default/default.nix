@@ -15,7 +15,7 @@
     auto-optimise-store = true;
   };
 
-  # Coleta de lixo automática (limpeza de disco)
+  # Automatic garbage collection
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -73,12 +73,12 @@
 
   programs.zsh.enable = true;
 
-  # Habilitar o módulo do MangoWM no sistema
+  # Enable MangoWM system module
   programs.mango.enable = true;
 
-  # Habilitar suporte a aplicativos X11 em ambiente Wayland (XWayland)
+  # Enable XWayland support
   programs.xwayland.enable = true;
 
-  # Versão de estado inicial (não alterar após a instalação inicial)
+  # System state version
   system.stateVersion = "24.05";
 }

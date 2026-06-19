@@ -72,6 +72,6 @@
     };
   };
 
-  # Mapear logotipos png do fastfetch
+  # Map fastfetch PNG logo files
   xdg.configFile."fastfetch/logos".source = ./../../../configs/fastfetch/logos;
 }

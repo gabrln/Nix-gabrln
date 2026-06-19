@@ -65,7 +65,7 @@
       inactive_tab_background #313244
       cursor_trail_color      #a3b4eb
 
-      # Sincronização de tema dinâmico do Noctalia
+      # Noctalia dynamic theme integration
       include themes/noctalia.conf
     '';
   };
