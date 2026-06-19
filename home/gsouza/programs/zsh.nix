@@ -7,7 +7,6 @@
     bat
     fd
     ripgrep
-    fzf
     zoxide
     starship
     kitty
@@ -219,6 +218,12 @@
 
   # Zoxide (Autojump)
   programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  # FZF
+  programs.fzf = {
     enable = true;
     enableZshIntegration = true;
   };
