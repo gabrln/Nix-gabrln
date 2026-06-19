@@ -24,7 +24,7 @@
     blur_params_saturation=1.0
 
     shadows=1
-    layer_shadows=1
+    layer_shadows=0
     shadow_only_floating=1
     shadows_size=12
     shadows_blur=15

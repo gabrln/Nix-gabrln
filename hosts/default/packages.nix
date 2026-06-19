@@ -30,6 +30,12 @@
     xdg-desktop-portal-gtk
     libqalculate
     btop
+    
+    # Ferramentas básicas de compressão/extração
+    zip
+    unzip
+    p7zip
+    unrar
   ];
 
   # Variáveis de sessão para temas Qt
