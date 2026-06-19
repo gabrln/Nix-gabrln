@@ -44,8 +44,8 @@ else
   set_val "shadows" "1"
   set_val "gappih" "5"
   set_val "gappiv" "5"
-  set_val "gappoh" "10"
-  set_val "gappov" "10"
+  set_val "gappoh" "5"
+  set_val "gappov" "5"
   mmsg dispatch reload_config
   notify-send 'Modo Jogo Desativado' 'Configurações restauradas.' -t 2000
 fi

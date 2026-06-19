@@ -26,6 +26,10 @@
     # Borders
     borderpx=2
     border_radius=10
+    gappih=5
+    gappiv=5
+    gappoh=5
+    gappov=5
 
     # Animations
     animations=1
