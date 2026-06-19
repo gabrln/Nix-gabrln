@@ -4,7 +4,6 @@
   imports = [
     ./kitty.nix
     ./zsh.nix
-    ./starship.nix
     ./yazi.nix
     ./zellij.nix
     ./nvim.nix

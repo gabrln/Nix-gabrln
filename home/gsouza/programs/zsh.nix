@@ -213,6 +213,9 @@
         }
         zle -N _fzf_file_no_hidden
       fi
+
+      # Initialize Starship Prompt
+      eval "$(starship init zsh)"
     '';
   };
 

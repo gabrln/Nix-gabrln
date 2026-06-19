@@ -25,8 +25,14 @@
 
     # Animations
     animations=1
-    animation_duration=80
-    animation_curve=0.25,0.1,0.25,1.0
+    animation_duration_open=80
+    animation_duration_close=80
+    animation_duration_move=80
+    animation_duration_tag=80
+    animation_curve_open=0.25,0.1,0.25,1.0
+    animation_curve_close=0.25,0.1,0.25,1.0
+    animation_curve_move=0.25,0.1,0.25,1.0
+    animation_curve_tag=0.25,0.1,0.25,1.0
     animation_type_open=fade
     animation_type_close=fade
 

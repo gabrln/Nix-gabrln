@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   imports = [
@@ -75,4 +75,17 @@
       "application/x-extension-xht" = "firefox.desktop";
     };
   };
+
+  # Ensure starship.toml is writable so Noctalia can write the color palette to it
+  home.activation.setupStarshipConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    config_file="$HOME/.config/starship.toml"
+    if [ -f "$config_file" ]; then
+      chmod +w "$config_file"
+    else
+      mkdir -p "$HOME/.config"
+      echo 'palette = "noctalia"' > "$config_file"
+      echo 'add_newline = false' >> "$config_file"
+      chmod 644 "$config_file"
+    fi
+  '';
 }
