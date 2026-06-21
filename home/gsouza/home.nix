@@ -13,21 +13,16 @@
   home.homeDirectory = "/home/gsouza";
   home.stateVersion = "24.05";
 
-  # Variáveis de sessão de usuário
-  home.sessionVariables = {
-    # Força apps Electron a rodarem nativamente em Wayland
-    NIXOS_OZONE_WL = "1";
-    # Aponta para a ICD oficial do Vulkan Intel Iris Xe
-    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/intel_icd.x86_64.json";
-  };
-
-  # Pacotes GUI requeridos para associações MIME
+  # Pacotes GUI de Usuário
   home.packages = with pkgs; [
     zathura      # PDF Viewer
     swayimg      # Image Viewer Wayland
     mpv          # Media Player
     file-roller  # Archive Manager
     rclone       # Cloud Sync
+    protonup-qt  # Manage Proton-GE versions
+    prismlauncher # Minecraft launcher
+    spotify      # Spotify client
   ];
 
   # User cursor theme

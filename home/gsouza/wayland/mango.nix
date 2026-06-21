@@ -66,8 +66,8 @@
     numlockon=1
 
     # Autostart Services
-    exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-    exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+    exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP NIXOS_OZONE_WL VK_ICD_FILENAMES
+    exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP NIXOS_OZONE_WL VK_ICD_FILENAMES
     exec-once=gnome-keyring-daemon --start --components=secrets
     exec-once=noctalia
     exec-once=wl-paste --watch cliphist store
