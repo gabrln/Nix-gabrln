@@ -41,28 +41,53 @@ A configuração está otimizada para o processador Intel com placa integrada Ir
 3. **Áudio de Baixa Latência (Pro-Audio):** Limites de RAM (`memlock`) configurados como ilimitados para o grupo `audio`. Pipewire configurado com relógio de 48kHz e tamanho de bloco (quantum) estável de 256 amostras (latência de ~5.3ms). Wireplumber com suspensão automática de ALSA e Bluetooth desativada.
 4. **Virtualização:** Podman habilitado com socket de emulação do Docker para compatibilidade transparente com Devcontainers e ferramentas Docker originais.
 
-## Guia de Instalação em Nova Máquina
+## Guia de Instalação e Implantação
 
-Siga os passos abaixo para implantar esta configuração a partir de uma instalação limpa utilizando a imagem ISO do NixOS.
+Você pode implantar esta configuração tanto em uma máquina nova utilizando o instalador gráfico (Calamares) quanto manualmente via linha de comando.
 
-### 1. Preparação e Particionamento
+---
 
-Dê boot na máquina utilizando o instalador do NixOS. Execute o particionamento utilizando `gdisk` ou `parted`.
-O esquema recomendado utiliza Btrfs sobre GPT:
-*   `/dev/sdX1`: EFI System Partition (mínimo 512MB, formatada em FAT32/vfat).
-*   `/dev/sdX2`: Partição Root (formatada em Btrfs).
+### Opção A: Pós-Instalação Gráfica (Recomendado)
 
-Crie os subvolumes Btrfs desejados (exemplo: `root`, `home`, `nix`):
+Se você preferir instalar o NixOS usando a interface visual (Calamares) da imagem ISO oficial:
+
+1.  **Instalação Base:** Realize a instalação do NixOS normalmente usando o instalador gráfico da ISO (definindo locales, fuso horário e particionamento padrão).
+2.  **Primeira Inicialização:** Inicialize o novo sistema e abra o terminal.
+3.  **Clonar Configurações:** Obtenha temporariamente o Git via Nix shell para clonar a ramificação `experimental` na sua pasta de usuário:
+    ```bash
+    nix-shell -p git
+    git clone -b experimental https://github.com/gsouza/nixos-config.git ~/.config/nixos
+    ```
+4.  **Copiar Arquivo de Hardware:** Copie o arquivo de hardware gerado automaticamente durante a instalação para a pasta do repositório:
+    ```bash
+    cp /etc/nixos/hardware-configuration.nix ~/.config/nixos/hosts/default/hardware-configuration.nix
+    ```
+5.  **Reconstruir o Sistema:** Aplique as configurações declarativas do flake executando:
+    ```bash
+    cd ~/.config/nixos
+    nixos-rebuild switch --flake .#nixos
+    ```
+6.  **Pronto:** Após a reinicialização, o sistema carregará o MangoWM e o Noctalia, e você poderá usar o utilitário `nh os switch` normalmente para futuras atualizações.
+
+---
+
+### Opção B: Instalação Manual via CLI
+
+Para fazer a instalação limpa diretamente a partir da linha de comando no terminal da ISO:
+
+#### 1. Preparação e Particionamento (Btrfs)
+Execute o particionamento utilizando `gdisk` ou `parted` (esquema GPT):
+*   `/dev/sdX1`: Partição de Boot (FAT32/vfat, mínimo 512MB).
+*   `/dev/sdX2`: Partição Root (Btrfs).
+
+Crie e monte os subvolumes Btrfs:
 ```bash
 mount /dev/sdX2 /mnt
 btrfs subvolume create /mnt/root
 btrfs subvolume create /mnt/home
 btrfs subvolume create /mnt/nix
 umount /mnt
-```
 
-Monte os subvolumes na estrutura de instalação:
-```bash
 mount -o subvol=root,compress=zstd,noatime /dev/sdX2 /mnt
 mkdir -p /mnt/boot /mnt/home /mnt/nix
 mount /dev/sdX1 /mnt/boot
@@ -70,36 +95,30 @@ mount -o subvol=home,compress=zstd,noatime /dev/sdX2 /mnt/home
 mount -o subvol=nix,compress=zstd,noatime /dev/sdX2 /mnt/nix
 ```
 
-### 2. Geração da Configuração de Hardware
-
-Gere a configuração física da máquina sob o diretório temporário:
+#### 2. Gerar Configuração Física e Clonar
+Gere a configuração física base na estrutura montada:
 ```bash
 nixos-generate-config --root /mnt
 ```
-Isso criará os arquivos `/mnt/etc/nixos/configuration.nix` e `/mnt/etc/nixos/hardware-configuration.nix`.
 
-### 3. Clonar a Configuração Declarativa
-
-Instale temporariamente o Git no ambiente da ISO para realizar o clone da ramificação `experimental`:
+Instale temporariamente o Git na ISO para clonar as configurações no diretório correto:
 ```bash
 nix-shell -p git
 git clone -b experimental https://github.com/gsouza/nixos-config.git /mnt/home/gsouza/.config/nixos
 ```
 
-Substitua o arquivo de hardware do repositório pelo arquivo gerado pelo instalador na etapa anterior:
+Mova o arquivo de hardware recém-gerado da máquina para a pasta de dotfiles:
 ```bash
 cp /mnt/etc/nixos/hardware-configuration.nix /mnt/home/gsouza/.config/nixos/hosts/default/hardware-configuration.nix
 ```
 
-### 4. Executar a Instalação Inicial
-
-Navegue até o diretório da configuração e execute o comando de instalação apontando para a flake `nixos`:
+#### 3. Executar o Instalador
+Navegue ao repositório clonado e inicie a compilação e instalação:
 ```bash
 cd /mnt/home/gsouza/.config/nixos
 nixos-install --flake .#nixos
 ```
-
-Ao finalizar, defina a senha do usuário `gsouza` quando solicitado, remova a mídia de boot e reinicie a máquina.
+Ao terminar, defina a senha para o usuário `gsouza`, remova a mídia de boot e reinicie a máquina.
 
 ---
 
