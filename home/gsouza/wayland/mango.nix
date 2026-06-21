@@ -75,8 +75,7 @@
     # Window Rules for Named Scratchpads
     windowrule=isnamedscratchpad:1,width:1600,height:900,appid:kitty-drop
     windowrule=isnamedscratchpad:1,width:1400,height:800,appid:btop-scratch
-    windowrule=isnamedscratchpad:1,width:1600,height:900,appid:keyhints-scratch
-    windowrule=isnamedscratchpad:1,width:1600,height:900,appid:aliashints-scratch
+    windowrule=isnamedscratchpad:1,width:1280,height:720,appid:keyhints-scratch
 
     # Base Bindings
     bind=SUPER,Return,spawn_shell,kitty --title Kitty
@@ -86,7 +85,8 @@
     bind=SUPER,v,spawn_shell,noctalia msg panel-toggle clipboard
     bind=SUPER,p,spawn_shell,noctalia msg panel-toggle session
     bind=SUPER+SHIFT,n,spawn_shell,noctalia msg panel-toggle control-center notifications
-    bind=SUPER+SHIFT,e,spawn_shell,noctalia msg settings-toggle
+    bind=SUPER+SHIFT,e,spawn_shell,nautilus
+    bind=SUPER,i,spawn_shell,noctalia msg settings-toggle
     bind=SUPER,n,spawn_shell,noctalia msg nightlight-toggle
     bind=SUPER,y,spawn_shell,noctalia msg caffeine-toggle
     bind=SUPER,w,spawn_shell,noctalia msg wallpaper-random
@@ -96,7 +96,6 @@
 
     # Help Cheatsheets & Window Info
     bind=SUPER,h,toggle_named_scratchpad,keyhints-scratch,none,kitty --class keyhints-scratch -e ~/.config/mango/scripts/KeyHints.sh
-    bind=SUPER+SHIFT,h,toggle_named_scratchpad,aliashints-scratch,none,kitty --class aliashints-scratch -e ~/.config/mango/scripts/AliasHints.sh
     bind=SUPER+SHIFT,d,spawn_shell,~/.config/mango/scripts/WindowInfo.sh
 
     # Hardware & Media Keys

@@ -34,6 +34,8 @@
     slurp
     adw-gtk3
     kdePackages.qt6ct
+    libsForQt5.qt5ct
+    ddcutil
     xdg-desktop-portal-gtk
     libqalculate
     btop
@@ -48,7 +50,7 @@
 
   # Session variables for Qt, Wayland (Electron), and Vulkan
   environment.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QT_QPA_PLATFORMTHEME = "qt5ct";
     NIXOS_OZONE_WL = "1";
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/intel_icd.x86_64.json";
   };

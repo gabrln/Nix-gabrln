@@ -48,6 +48,9 @@
     # Limpa arquivos temporários no SSD a cada inicialização
     tmp.cleanOnBoot = true;
 
+    # Carrega o driver i2c-dev para permitir controle de brilho via ddcutil
+    kernelModules = [ "i2c-dev" ];
+
     # Ajustes de baixa latência e prioridade para RAM/Kernel
     kernel.sysctl = {
       # swappiness de 100 força a compactação no ZRAM em vez de ejetar o cache de páginas do FS
@@ -62,6 +65,9 @@
 
   # Ativa swap compactada na RAM (ZRAM)
   zramSwap.enable = true;
+
+  # Habilita o barramento I2C para controle de hardware do monitor
+  hardware.i2c.enable = true;
 
   # Regras Administrativas de Sudo sem Senha (NOPASSWD) para comandos básicos
   security.sudo = {
@@ -119,7 +125,7 @@
   users.users.gsouza = {
     isNormalUser = true;
     description = "Gabriel de Souza";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" ];
     shell = pkgs.zsh;
   };
 

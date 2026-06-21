@@ -4,6 +4,7 @@
   imports = [
     inputs.noctalia.homeModules.default
     inputs.mango.hmModules.mango
+    inputs.nixvim.homeModules.nixvim
     ./programs
     ./wayland
   ];
@@ -23,6 +24,12 @@
     protonup-qt  # Manage Proton-GE versions
     prismlauncher # Minecraft launcher
     spotify      # Spotify client
+    nautilus     # File Manager (GUI)
+    duf          # Disk Usage Free (Visual disk display)
+    gping        # Graphical ping (Interactive latency display)
+    tldr         # Simplified and community-driven man pages helper
+    delta        # Syntax-highlighting pager for git/diffs
+    procs        # Modern replacement for ps (processes viewer)
   ];
 
   # User cursor theme
@@ -99,5 +106,11 @@
       echo 'add_newline = false' >> "$config_file"
       chmod 644 "$config_file"
     fi
+  '';
+
+  # Garantir a existência declarativa dos diretórios de mídias Pictures/Screenshots e Pictures/Wallpapers
+  home.activation.createPicturesDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "$HOME/Pictures/Screenshots"
+    mkdir -p "$HOME/Pictures/Wallpapers"
   '';
 }

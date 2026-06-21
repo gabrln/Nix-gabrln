@@ -1,30 +1,47 @@
 { config, pkgs, ... }:
 
 {
-  programs.neovim = {
+  programs.nixvim = {
     enable = true;
-    withRuby = false;
-    withPython3 = false;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
 
-    initLua = ''
-      -- Clipboard (Wayland via wl-clipboard)
-      vim.opt.clipboard = "unnamedplus"
+    # Habilita suporte a clipboard do Wayland via wl-copy
+    clipboard.providers.wl-copy.enable = true;
 
-      -- Basics
-      vim.opt.number = true
-      vim.opt.relativenumber = true
-      vim.opt.scrolloff = 8
-      vim.opt.tabstop = 2
-      vim.opt.shiftwidth = 2
-      vim.opt.expandtab = true
-      vim.opt.smartindent = true
-      vim.opt.wrap = true
-      vim.opt.ignorecase = true
-      vim.opt.smartcase = true
-      vim.opt.termguicolors = true
-    '';
+    opts = {
+      # Basics
+      number = true;
+      relativenumber = true;
+      scrolloff = 8;
+      tabstop = 2;
+      shiftwidth = 2;
+      expandtab = true;
+      smartindent = true;
+      wrap = true;
+      ignorecase = true;
+      smartcase = true;
+      termguicolors = true;
+    };
+
+    # Plugins recomendados, sem autocompletar popups (no nvim-cmp)
+    plugins = {
+      lualine.enable = true;      # Barra de status premium
+      bufferline.enable = true;   # Visualizar buffers abertos no topo
+      treesitter.enable = true;   # Destaque de sintaxe inteligente
+      telescope.enable = true;    # Localizador fuzzy de arquivos e texto
+      web-devicons.enable = true; # Ícones para a interface
+      gitsigns.enable = true;     # Indicadores de modificações git
+      which-key.enable = true;    # Dicas de comandos e atalhos na tela
+      comment.enable = true;      # Comentar/descomentar linhas rapidamente
+      lsp = {
+        enable = true;
+        servers = {
+          nil_ls.enable = true;   # Language Server oficial para Nix
+          bashls.enable = true;   # Language Server para Shell/Bash
+        };
+      };
+    };
   };
 }

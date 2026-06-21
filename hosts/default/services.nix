@@ -97,15 +97,22 @@
   # Habilita suporte a Flatpak para o Bazaar e outros instaladores
   services.flatpak.enable = true;
 
-  # Adiciona repositório Flathub se ele já não existir
+  # Adiciona repositório Flathub e configura permissões de temas para Flatpak
   systemd.services.configure-flathub = {
-    description = "Configurar repositório Flathub para o Flatpak";
+    description = "Configurar repositório Flathub e overrides de tema para o Flatpak";
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo";
+      ExecStart = pkgs.writeShellScript "flatpak-setup" ''
+        ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+        ${pkgs.flatpak}/bin/flatpak override --system --filesystem=/nix/store:ro
+        ${pkgs.flatpak}/bin/flatpak override --system --filesystem=xdg-config/gtk-3.0:ro
+        ${pkgs.flatpak}/bin/flatpak override --system --filesystem=xdg-config/gtk-4.0:ro
+        ${pkgs.flatpak}/bin/flatpak override --system --filesystem=~/.themes:ro
+        ${pkgs.flatpak}/bin/flatpak override --system --filesystem=~/.icons:ro
+      '';
       RemainAfterExit = true;
     };
   };
