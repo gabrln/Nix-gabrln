@@ -34,7 +34,7 @@
     enable_builtin_templates = true
     enable_community_templates = true
     builtin_ids = [ "kitty", "starship", "qt" ]
-    community_ids = [ "yazi" ]
+    community_ids = [ "yazi", "neovim" ]
   '';
 
   # Custom Noctalia Template mapping for MangoWM to override scratchpad border color
