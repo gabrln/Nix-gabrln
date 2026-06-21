@@ -94,6 +94,22 @@
   services.power-profiles-daemon.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
+  # Habilita suporte a Flatpak para o Bazaar e outros instaladores
+  services.flatpak.enable = true;
+
+  # Adiciona repositório Flathub se ele já não existir
+  systemd.services.configure-flathub = {
+    description = "Configurar repositório Flathub para o Flatpak";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo";
+      RemainAfterExit = true;
+    };
+  };
+
   # Noctalia Greeter
   programs.noctalia-greeter = {
     enable = true;
@@ -143,7 +159,19 @@
   # XDG Portals
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "*";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+      mango = {
+        default = [ "gtk" ];
+        "org.freedesktop.impl.portal.Screencast" = [ "wlr" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+      };
+    };
   };
 }

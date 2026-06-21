@@ -8,7 +8,6 @@
     curl
     wget
     nwg-look
-    steam
     vesktop
     obsidian
     bazaar
