@@ -45,6 +45,20 @@ A configuração está otimizada para o processador Intel com placa integrada Ir
 
 Você pode implantar esta configuração tanto em uma máquina nova utilizando o instalador gráfico (Calamares) quanto manualmente via linha de comando.
 
+### Esquema de Particionamento e Subvolumes Btrfs Recomendado
+
+Para tirar o máximo proveito das otimizações de disco (como compactação ativa e noatime) descritas nesta configuração, recomendamos estruturar o disco principal utilizando **Btrfs** com um layout plano de subvolumes:
+
+| Subvolume | Ponto de Montagem | Opções de Montagem Recomendadas | Função |
+| :--- | :--- | :--- | :--- |
+| `/dev/sdX1` | `/boot` | `fmask=0077,dmask=0077` (FAT32) | Partição EFI de Boot |
+| `@root` (ou `@`) | `/` | `subvol=root,compress=zstd,noatime,ssd` | Raiz do Sistema (OS) |
+| `@home` | `/home` | `subvol=home,compress=zstd,noatime,ssd` | Arquivos pessoais do usuário |
+| `@nix` | `/nix` | `subvol=nix,compress=zstd,noatime,ssd` | Repositório Nix Store (Read-Only/Store) |
+
+> [!TIP]
+> * **No Instalador Gráfico (Calamares):** Escolha o particionamento manual. Crie a partição EFI em FAT32 `/boot`. Em seguida, crie a partição Btrfs e configure os subvolumes montando `@` em `/`, `@home` em `/home` e `@nix` em `/nix`. O instalador gráfico aplicará as opções de montagem e gerará o arquivo `/etc/nixos/hardware-configuration.nix` correspondente de forma totalmente automática.
+
 ---
 
 ### Opção A: Pós-Instalação Gráfica (Recomendado)
@@ -129,6 +143,25 @@ Esta branch foca em um sistema limpo, modular e altamente responsivo:
 *   **Modo Escuro Simplificado:** Não faz uso de wrappers complexos ou hacks de variáveis para forçar temas em aplicativos empacotados em AppImages ou isolados. Os que não herdam o tema dinâmico rodam no modo escuro padrão do sistema provido pelo portal (`color-scheme = prefer-dark`).
 *   **Template Dinâmico no Nixvim:** Nixvim integrado ao template de Neovim do Noctalia. O plugin `base16-nvim` carrega dinamicamente a paleta de cores gerada pelo `matugen.lua` em `~/.config/nvim/lua/matugen.lua` e reage em tempo real a atualizações via sinal `SIGUSR1`.
 *   **Nix Helper (`nh`):** Totalmente integrado para simplificar o gerenciamento e a limpeza segura do sistema.
+
+---
+
+## Alternando entre as Configurações (main / experimental)
+
+Como o NixOS compila e aplica o estado atual da pasta física `~/.config/nixos`, trocar de configuração do sistema é tão simples quanto trocar de branch no Git e rodar o switch do Nix:
+
+1.  **Entrar no modo seguro (estável):**
+    ```bash
+    git checkout main && nh os switch
+    ```
+2.  **Voltar para o modo experimental (desenvolvimento):**
+    ```bash
+    git checkout experimental && nh os switch
+    ```
+
+> [!NOTE]
+> * **Arquivos não rastreados:** Lembre-se de dar `git add` ou `git stash` antes de mudar de branch, pois o Nix Flake lê apenas arquivos que estão sob o controle do Git.
+> * **Compatibilidade:** Para que o switch simplificado sem parâmetros funcione em ambas as ramificações, a branch `main` deve possuir a mesma renomeação do host em seu `flake.nix` (`nixosConfigurations.nixos`).
 
 ---
 
