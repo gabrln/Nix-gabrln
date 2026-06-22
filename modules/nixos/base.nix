@@ -83,7 +83,7 @@
   programs.nh = {
     enable = true;
     clean.enable = true;
-    clean.extraArgs = "--keep-since 7d --keep 3";
+    clean.extraArgs = "--keep 10";
     # We reference the dynamic path in /persist
     flake = "/persist/home/${vars.userName}/.config/nixos";
   };

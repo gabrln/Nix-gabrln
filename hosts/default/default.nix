@@ -16,6 +16,7 @@
       device = "nodev";
       efiSupport = true;
       useOSProber = true;
+      configurationLimit = 3;
     };
     loader.efi.canTouchEfiVariables = true;
 

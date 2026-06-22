@@ -11,7 +11,7 @@
 
   boot.initrd.supportedFilesystems = [ "btrfs" ];
 
-  # Preservação de dados essenciais a nível de sistema
+  # Preservation of essential system-level data
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
@@ -20,7 +20,7 @@
       "/var/lib/bluetooth"
       "/var/lib/NetworkManager"
       "/etc/NetworkManager/system-connections"
-      "/var/lib/containers" # Persiste imagens/dados do Podman e Docker
+      "/var/lib/containers" # Persists Podman and Docker images/data
     ];
     files = [
       "/etc/machine-id"
@@ -32,15 +32,15 @@
     ];
   };
 
-  # Vinculação das pastas persistentes da home do usuário
+  # Bind mount persistent user home directories
   environment.persistence."/persist".users.${vars.userName} = {
     directories = [
       "Downloads"
       "Music"
       "Pictures"
       "Documents"
-      "Projects" # Seus projetos e código
-      ".config/nixos" # O próprio repositório para podermos rodar nh os switch
+      "Projects" # Your projects and code
+      ".config/nixos" # The repository itself to allow running nh os switch
       ".local/share/Steam"
       ".steam"
       ".mozilla"
