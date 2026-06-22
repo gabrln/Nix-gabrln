@@ -13,36 +13,10 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  # RAM root (tmpfs) for impermanence
+  # Root partition (ext4) mounted by Label
   fileSystems."/" =
-    { device = "none";
-      fsType = "tmpfs";
-      options = [ "size=4G" "mode=755" ];
-    };
-
-  # Persistent Btrfs subvolumes mounted by Label
-  fileSystems."/home" =
     { device = "/dev/disk/by-label/nixos-data";
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" ];
-    };
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-label/nixos-data";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" ];
-    };
-
-  fileSystems."/persist" =
-    { device = "/dev/disk/by-label/nixos-data";
-      fsType = "btrfs";
-      options = [ "subvol=persist" "compress=zstd" "noatime" ];
-    };
-
-  fileSystems."/var/log" =
-    { device = "/dev/disk/by-label/nixos-data";
-      fsType = "btrfs";
-      options = [ "subvol=log" "compress=zstd" "noatime" ];
+      fsType = "ext4";
     };
 
   # EFI boot partition mounted by Label

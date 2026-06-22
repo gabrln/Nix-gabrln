@@ -56,7 +56,7 @@
   users.users.${vars.userName} = {
     isNormalUser = true;
     description = vars.userDescription;
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" "docker" ];
     shell = pkgs.zsh;
   };
 
@@ -84,7 +84,6 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep 10";
-    # We reference the dynamic path in /persist
-    flake = "/persist/home/${vars.userName}/.config/nixos";
+    flake = "/home/${vars.userName}/.config/nixos";
   };
 }

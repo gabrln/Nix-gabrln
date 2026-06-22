@@ -44,7 +44,7 @@
     unzip
     p7zip
     unrar
-    podman-compose
+    docker-compose
   ];
 
   # Session variables for Qt, Wayland (Electron), and Vulkan

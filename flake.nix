@@ -56,8 +56,7 @@
           ./modules/nixos/latency.nix
           ./modules/nixos/audio.nix
           ./modules/nixos/gpu.nix
-          ./modules/nixos/podman.nix
-          ./modules/nixos/impermanence.nix
+          ./modules/nixos/docker.nix
           mango.nixosModules.mango
           noctalia-greeter.nixosModules.default
           home-manager.nixosModules.home-manager
