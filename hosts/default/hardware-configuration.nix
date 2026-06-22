@@ -13,6 +13,47 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  # Raiz em memória RAM (tmpfs) para o impermanence
+  fileSystems."/" =
+    { device = "none";
+      fsType = "tmpfs";
+      options = [ "size=4G" "mode=755" ];
+    };
+
+  # Subvolumes Btrfs persistentes (utilizando o UUID original)
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/fc2e1162-1baa-4ee7-828c-f9df2779ce41";
+      fsType = "btrfs";
+      options = [ "subvol=home" "compress=zstd" "noatime" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/fc2e1162-1baa-4ee7-828c-f9df2779ce41";
+      fsType = "btrfs";
+      options = [ "subvol=nix" "compress=zstd" "noatime" ];
+    };
+
+  fileSystems."/persist" =
+    { device = "/dev/disk/by-uuid/fc2e1162-1baa-4ee7-828c-f9df2779ce41";
+      fsType = "btrfs";
+      options = [ "subvol=persist" "compress=zstd" "noatime" ];
+    };
+
+  fileSystems."/var/log" =
+    { device = "/dev/disk/by-uuid/fc2e1162-1baa-4ee7-828c-f9df2779ce41";
+      fsType = "btrfs";
+      options = [ "subvol=log" "compress=zstd" "noatime" ];
+    };
+
+  # Partição EFI de boot
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/A0C6-231B";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+  swapDevices = [ ];
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

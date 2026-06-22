@@ -37,15 +37,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Declarative partitioning and opt-in state persistence inputs
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Opt-in state persistence inputs
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { self, nixpkgs, home-manager, mango, noctalia, noctalia-greeter, antigravity-nix, nixvim, disko, impermanence, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mango, noctalia, noctalia-greeter, antigravity-nix, nixvim, impermanence, ... }@inputs:
     let
       system = "x86_64-linux";
       vars = import ./vars.nix;
@@ -55,9 +51,7 @@
         inherit system;
         specialArgs = { inherit inputs vars; };
         modules = [
-          disko.nixosModules.disko
           ./hosts/default/default.nix
-          ./hosts/default/disko.nix
           ./modules/nixos/base.nix
           ./modules/nixos/latency.nix
           ./modules/nixos/audio.nix
