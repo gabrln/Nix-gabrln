@@ -132,7 +132,7 @@
   system.activationScripts.noctalia-greeter-scale = {
     text = ''
       ${pkgs.coreutils}/bin/mkdir -p /var/lib/noctalia-greeter
-      ${pkgs.coreutils}/bin/chown greeter:greeter /var/lib/noctalia-greeter
+      ${pkgs.coreutils}/bin/chown greeter:greetd /var/lib/noctalia-greeter
       ${pkgs.coreutils}/bin/chmod 0755 /var/lib/noctalia-greeter
       
       conf_file="/var/lib/noctalia-greeter/greeter.conf"
@@ -145,7 +145,7 @@
       else
         echo "scale=1.0" > "$conf_file"
       fi
-      ${pkgs.coreutils}/bin/chown greeter:greeter "$conf_file"
+      ${pkgs.coreutils}/bin/chown greeter:greetd "$conf_file"
       ${pkgs.coreutils}/bin/chmod 0644 "$conf_file"
     '';
   };
