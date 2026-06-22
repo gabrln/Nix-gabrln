@@ -91,7 +91,7 @@ Este é o método ideal (Método 1) e mais utilizado pela comunidade NixOS, pois
    ```bash
    cd ~/.config/nixos
    git add hosts/default/hardware-configuration.nix
-   sudo nixos-rebuild switch --flake .#nixos
+   sudo nixos-rebuild switch --flake .#gabrln
    ```
 
 6. **Pronto**:
@@ -99,6 +99,25 @@ Este é o método ideal (Método 1) e mais utilizado pela comunidade NixOS, pois
    ```bash
    nh os switch
    ```
+
+### ⚠️ Dicas e Solução de Problemas Pós-Instalação (Lições Aprendidas)
+
+Durante a nossa instalação de validação, identificamos alguns pontos de atenção importantes:
+
+1. **Permissões do Git (Diretório Duvidoso / Dubious Ownership)**:
+   Ao rodar `nixos-rebuild` como `root`, o Git pode recusar a leitura do repositório clonado pelo usuário comum devido a regras de segurança de propriedade de pasta.
+   * **Solução**: Configure o Git para considerar o diretório confiável rodando (como root):
+     ```bash
+     git config --global --add safe.directory /home/gsouza/.config/nixos
+     ```
+     *(Substitua o caminho se o seu repositório estiver em `/home/gabrln` ou outro diretório).*
+
+2. **Senha do Usuário no Primeiro Login**:
+   Em instalações manuais, a conta do usuário pode iniciar travada ou sem senha definida pelo instalador gráfico.
+   * **Solução**: Definimos declarativamente `initialPassword = "nixos";` no `modules/nixos/base.nix`. O primeiro login do usuário `gsouza` usará a senha `nixos` (que você deve alterar logo em seguida com `passwd`). Se precisar alterar a senha como root no TTY, basta rodar `passwd gsouza`.
+
+3. **Ordem de Execução de Scripts de Ativação**:
+   Scripts personalizados definidos em `system.activationScripts` que manipulam permissões de usuários ou grupos (como `chown greeter:greeter`) devem **obrigatoriamente** declarar a dependência `deps = [ "users" ];`. Sem isso, o script pode rodar antes da criação física das contas e grupos pelo NixOS, gerando o erro de compilação `invalid group: 'greeter:greeter'`.
 
 ---
 
