@@ -56,6 +56,7 @@
   # 3. User Configuration (Gabriel)
   users.users.${vars.userName} = {
     isNormalUser = true;
+    initialPassword = "nixos";
     description = vars.userDescription;
     extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" "docker" ];
     shell = pkgs.zsh;
