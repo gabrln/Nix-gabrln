@@ -43,6 +43,11 @@
     input_path = "${config.home.homeDirectory}/.config/noctalia/templates/mango.conf"
     output_path = "${config.home.homeDirectory}/.config/mango/noctalia.conf"
     post_hook = "mmsg dispatch reload_config"
+
+    [templates.neovim]
+    input_path = "${config.home.homeDirectory}/.config/noctalia/templates/neovim.lua"
+    output_path = "${config.home.homeDirectory}/.config/nvim/lua/matugen.lua"
+    post_hook = ""
   '';
 
   # Custom Mango theme template using focuscolor (primary) for scratchpad borders
@@ -62,4 +67,8 @@
     globalcolor = 0x{{colors.primary_container.default.hex_stripped}}ff
     overlaycolor = 0x{{colors.secondary_container.default.hex_stripped}}ff
   '';
+
+  xdg.configFile."noctalia/templates/neovim.lua".source =
+    config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/.config/nixos/modules/home/dotfiles/noctalia/templates/neovim.lua";
 }

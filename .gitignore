@@ -1,0 +1,2 @@
+# Ignore generated runtime files created by Noctalia through the Neovim template
+/modules/home/dotfiles/nvim/lua/matugen.lua
