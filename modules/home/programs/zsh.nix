@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # User Packages
@@ -53,13 +53,18 @@
     config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/.config/nixos/modules/home/dotfiles/zsh/.zshrc";
 
+  # Ensure config directory exists
+  home.activation.ensureConfigDirs = lib.hm.dag.entryBefore [ "writeBoundary" ] ''
+    mkdir -p "$HOME/.config/kitty/themes"
+  '';
+
   # Zoxide (Autojump)
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
   };
-}
 
+  # FZF
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;

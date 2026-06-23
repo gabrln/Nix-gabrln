@@ -4,8 +4,10 @@
   # Enable MangoWM
   wayland.windowManager.mango.enable = true;
 
-  # Map MangoWM scripts directory
-  xdg.configFile."mango/scripts".source = ../dotfiles/mango/scripts;
+  # Map MangoWM scripts directory (mutable - editable without rebuild)
+  xdg.configFile."mango/scripts".source =
+    config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/.config/nixos/modules/home/dotfiles/mango/scripts";
 
   # Custom MangoWM config mapping all user bindings
   xdg.configFile."mango/config.conf".text = ''
@@ -97,8 +99,8 @@
     bind=SUPER,F2,spawn_shell,noctalia msg mic-mute
 
     # Help Cheatsheets & Window Info
-    bind=SUPER,h,toggle_named_scratchpad,keyhints-scratch,none,kitty --class keyhints-scratch -e ~/.config/mango/scripts/KeyHints.sh
-    bind=SUPER+SHIFT,d,spawn_shell,~/.config/mango/scripts/WindowInfo.sh
+    bind=SUPER,h,toggle_named_scratchpad,keyhints-scratch,none,kitty --class keyhints-scratch -e $HOME/.config/mango/scripts/KeyHints.sh
+    bind=SUPER+SHIFT,d,spawn_shell,$HOME/.config/mango/scripts/WindowInfo.sh
 
     # Hardware & Media Keys
     bind=NONE,XF86AudioRaiseVolume,spawn_shell,noctalia msg volume-up
@@ -198,9 +200,9 @@
     bind=CTRL+ALT,Delete,quit,
 
     # Auxiliary scripts
-    bind=ALT,F4,spawn_shell,~/.config/mango/scripts/AltF4.sh
-    bind=SUPER+SHIFT,b,spawn_shell,~/.config/mango/scripts/ToggleBlur.sh
-    bind=SUPER+SHIFT,g,spawn_shell,~/.config/mango/scripts/ToggleGamemode.sh
+    bind=ALT,F4,spawn_shell,$HOME/.config/mango/scripts/AltF4.sh
+    bind=SUPER+SHIFT,b,spawn_shell,$HOME/.config/mango/scripts/ToggleBlur.sh
+    bind=SUPER+SHIFT,g,spawn_shell,$HOME/.config/mango/scripts/ToggleGamemode.sh
 
     # Dynamic settings overrides
     source-optional=~/.config/mango/dyn_settings.conf

@@ -15,7 +15,7 @@
     };
 
     mango = {
-      url = "github:mangowm/mango";
+      url = "github:mangowm/mango/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -51,7 +51,7 @@
         inherit system;
         specialArgs = { inherit inputs vars; };
         modules = [
-          ./hosts/default/default.nix
+          ./host/default.nix
           ./modules/core/base.nix
           ./modules/core/latency.nix
           ./modules/core/audio.nix

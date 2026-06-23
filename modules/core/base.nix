@@ -28,6 +28,7 @@
 
   # 2. Networking & Locale
   networking.hostName = vars.hostName;
+  networking.networkmanager.enable = true;
   time.timeZone = vars.timeZone;
   i18n.defaultLocale = vars.defaultLocale;
   i18n.extraLocaleSettings = {

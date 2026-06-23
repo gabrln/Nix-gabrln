@@ -13,9 +13,22 @@
   # Home Manager identity
   home.username = vars.userName;
   home.homeDirectory = "/home/${vars.userName}";
-  home.stateVersion = "24.05";
+  home.stateVersion = "26.05";
 
-  # User GUI Packages
+  # XDG user directories configuration
+  xdg.enable = true;
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    desktop = "${config.home.homeDirectory}/Desktop";
+    documents = "${config.home.homeDirectory}/Documents";
+    download = "${config.home.homeDirectory}/Downloads";
+    music = "${config.home.homeDirectory}/Music";
+    pictures = "${config.home.homeDirectory}/Pictures";
+    publicShare = "${config.home.homeDirectory}/Public";
+    templates = "${config.home.homeDirectory}/Templates";
+    videos = "${config.home.homeDirectory}/Videos";
+  };
   home.packages = with pkgs; [
     zathura      # PDF Viewer
     swayimg      # Image Viewer Wayland
