@@ -52,11 +52,11 @@
         specialArgs = { inherit inputs vars; };
         modules = [
           ./hosts/default/default.nix
-          ./modules/nixos/base.nix
-          ./modules/nixos/latency.nix
-          ./modules/nixos/audio.nix
-          ./modules/nixos/gpu.nix
-          ./modules/nixos/docker.nix
+          ./modules/core/base.nix
+          ./modules/core/latency.nix
+          ./modules/core/audio.nix
+          ./modules/core/gpu.nix
+          ./modules/core/docker.nix
           mango.nixosModules.mango
           noctalia-greeter.nixosModules.default
           home-manager.nixosModules.home-manager

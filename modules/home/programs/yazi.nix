@@ -172,5 +172,5 @@
   };
 
   # Map flavors directory for noctalia.yazi theme
-  xdg.configFile."yazi/flavors".source = ./../../../configs/yazi/flavors;
+  xdg.configFile."yazi/flavors".source = ../dotfiles/yazi/flavors;
 }

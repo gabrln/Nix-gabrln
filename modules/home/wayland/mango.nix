@@ -5,7 +5,7 @@
   wayland.windowManager.mango.enable = true;
 
   # Map MangoWM scripts directory
-  xdg.configFile."mango/scripts".source = ./../../../configs/mango/scripts;
+  xdg.configFile."mango/scripts".source = ../dotfiles/mango/scripts;
 
   # Custom MangoWM config mapping all user bindings
   xdg.configFile."mango/config.conf".text = ''
