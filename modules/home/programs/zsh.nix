@@ -41,7 +41,7 @@
         file = "share/zsh-history-substring-search/zsh-history-substring-search.zsh";
       }
     ];
-    initExtra = ''
+    initContent = ''
       # Load mutable dotfile configuration
       [[ -f ~/.config/nixos/modules/home/dotfiles/zsh/.zshrc ]] && source ~/.config/nixos/modules/home/dotfiles/zsh/.zshrc
     '';

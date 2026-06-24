@@ -1,6 +1,9 @@
 { ... }:
 
 {
+  # System state version
+  system.stateVersion = "26.05";
+
   # Bootloader Settings
   # Configured for EFI with GRUB bootloader
   boot = {
@@ -17,4 +20,10 @@
     # Clean temporary files from the SSD on every boot
     tmp.cleanOnBoot = true;
   };
+
+  # Desktop Program Enablements
+  programs.mango.enable = true;
+  programs.dconf.enable = true;
+  programs.steam.enable = true;
+  programs.xwayland.enable = true;
 }
