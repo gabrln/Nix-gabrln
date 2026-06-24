@@ -32,8 +32,8 @@
     [theme.templates]
     enable_builtin_templates = true
     enable_community_templates = true
-    builtin_ids = [ "btop", "gtk3", "gtk4", "kitty", "mango", "qt", "starship" ]
-    community_ids = [ "yazi" ]
+    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "kitty", "mango", "qt", "starship" ]
+    community_ids = [ "neovim", "yazi" ]
   '';
 
   # Custom Noctalia Template for Neovim dynamic theming
@@ -41,7 +41,7 @@
     [templates.neovim]
     input_path = "${config.home.homeDirectory}/.config/noctalia/templates/neovim.lua"
     output_path = "${config.home.homeDirectory}/.config/nvim/lua/matugen.lua"
-    post_hook = ""
+    post_hook = "pkill -SIGUSR1 nvim"
   '';
 
   xdg.configFile."noctalia/templates/neovim.lua".source =

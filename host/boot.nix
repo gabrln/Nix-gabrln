@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # System state version
@@ -13,12 +13,15 @@
       device = "nodev";
       efiSupport = true;
       useOSProber = true;
-      configurationLimit = 3;
+      configurationLimit = 5;
     };
     loader.efi.canTouchEfiVariables = true;
 
     # Clean temporary files from the SSD on every boot
     tmp.cleanOnBoot = true;
+
+    # CachyOS kernel with BORE scheduler and AVX2 optimizations
+    kernelPackages = pkgs.linuxPackages_cachyos;
   };
 
   # Desktop Program Enablements
@@ -26,4 +29,7 @@
   programs.dconf.enable = true;
   programs.steam.enable = true;
   programs.xwayland.enable = true;
+
+  # GameMode - on-demand CPU/gaming optimizations
+  programs.gamemode.enable = true;
 }

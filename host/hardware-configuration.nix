@@ -13,15 +13,13 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  # Root partition (ext4) mounted by Label
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos-data";
+    { device = "/dev/disk/by-uuid/e57b301d-58c6-4694-b82c-1cdb7990cee0";
       fsType = "ext4";
     };
 
-  # EFI boot partition mounted by Label
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/boot";
+    { device = "/dev/disk/by-uuid/6D9C-5AC3";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };

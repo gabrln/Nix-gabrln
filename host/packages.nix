@@ -45,7 +45,20 @@
     p7zip
     unrar
     docker-compose
+
+    # Gaming
+    mangohud
   ];
+
+  # Steam expansions
+  programs.steam = {
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    gamescopeSession.enable = true;
+  };
+
+  # nix-gaming Steam platform optimizations
+  programs.steam.platformOptimizations.enable = true;
 
   # Session variables for Qt, Wayland (Electron), and Vulkan
   environment.sessionVariables = {

@@ -17,9 +17,9 @@
     download-buffer-size = 536870912;
   };
 
-  # Automatic garbage collection (disabled to avoid conflict with nh.clean)
+  # Automatic garbage collection (weekly, keep last 10 generations)
   nix.gc = {
-    automatic = false;
+    automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
@@ -43,15 +43,10 @@
     LC_TIME = vars.defaultLocale;
   };
 
-  # Keyboard Layout (ABNT2)
+  # Keyboard Layout (ABNT2) - handled by MangoWM env var XKB_DEFAULT_LAYOUT
   console = {
     font = "Lat2-Terminus16";
     keyMap = "br-abnt2";
-  };
-
-  services.xserver.xkb = {
-    layout = "br";
-    variant = "";
   };
 
   # 3. User Configuration (Gabriel)
@@ -59,7 +54,7 @@
     isNormalUser = true;
     initialHashedPassword = "$6$1pFjnI70Pl2rHzgL$80/3xJ6nnvH/tdAQpfzP2oTwD39MvrxK10d/vHmYmLnJsW9nfNwjqmWDgLVH1CHStWlMp5tbs.8nM/vVQPrfL1";
     description = vars.userDescription;
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" "docker" "gamemode" ];
     shell = pkgs.zsh;
   };
 
@@ -85,11 +80,4 @@
   # Firewall
   networking.firewall.enable = true;
 
-  # Enable nh (Nix Helper) for cleaner and faster rebuilds
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep 10";
-    flake = "/home/${vars.userName}/.config/nixos";
-  };
 }

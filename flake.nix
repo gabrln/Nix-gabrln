@@ -27,9 +27,12 @@
       url = "github:noctalia-dev/noctalia-greeter";
     };
 
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
-  outputs = { self, nixpkgs, home-manager, mango, noctalia, noctalia-greeter, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mango, noctalia, noctalia-greeter, chaotic, nix-gaming, ... }@inputs:
     let
       system = "x86_64-linux";
       vars = import ./vars.nix;
@@ -48,6 +51,9 @@
           ./modules/core/audio.nix
           ./modules/core/gpu.nix
           ./modules/core/docker.nix
+          chaotic.nixosModules.default
+          nix-gaming.nixosModules.pipewireLowLatency
+          nix-gaming.nixosModules.platformOptimizations
           mango.nixosModules.mango
           noctalia-greeter.nixosModules.default
           home-manager.nixosModules.home-manager

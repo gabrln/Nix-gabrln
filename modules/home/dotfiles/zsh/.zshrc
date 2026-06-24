@@ -102,7 +102,7 @@ alias q="exit"
 alias ".."="cd .."
 alias "..."="cd ../.."
 alias "...."="cd ../../.."
-alias "-"="cd -"
+alias -- "-"="cd -"
 
 # Modern replacements from Obsidian notes
 alias ls="eza --icons --color=always --group-directories-first"
@@ -141,6 +141,8 @@ alias zjda="zellij delete-all-sessions --force"
 alias conf-zj="nvim ~/.config/zellij/config.kdl"
 
 # Nix shortcuts
+alias rebuild="cd ~/.config/nixos && sudo nixos-rebuild switch --flake ."
+alias update="cd ~/.config/nixos && nix flake update && sudo nixos-rebuild switch --flake ."
 alias nxi="nix profile install nixpkgs#"
 alias nxu="nix profile remove"
 alias nxl="nix profile list"

@@ -63,23 +63,22 @@
     };
   };
 
-  # Force login manager (Noctalia Greeter) scale to 1.0
+  # Force login manager (Noctalia Greeter) scale to 1.0 (TOML format)
   system.activationScripts.noctalia-greeter-scale = {
     deps = [ "users" ];
     text = ''
       ${pkgs.coreutils}/bin/mkdir -p /var/lib/noctalia-greeter
       ${pkgs.coreutils}/bin/chown greeter:greeter /var/lib/noctalia-greeter
       ${pkgs.coreutils}/bin/chmod 0755 /var/lib/noctalia-greeter
-      
-      conf_file="/var/lib/noctalia-greeter/greeter.conf"
-      if [ -f "$conf_file" ]; then
-        if ${pkgs.gnugrep}/bin/grep -q "^scale=" "$conf_file"; then
-          ${pkgs.gnused}/bin/sed -i 's/^scale=.*/scale=1.0/' "$conf_file"
-        else
-          echo "scale=1.0" >> "$conf_file"
-        fi
+
+      conf_file="/var/lib/noctalia-greeter/greeter.toml"
+      if [ ! -f "$conf_file" ] || ! ${pkgs.gnugrep}/bin/grep -q "^\[output\]" "$conf_file" 2>/dev/null; then
+        printf '# noctalia-greeter greeter.toml\n[output]\nscale = 1.0\n' > "$conf_file"
       else
-        echo "scale=1.0" > "$conf_file"
+        ${pkgs.gnused}/bin/sed -i '/^\[output\]/,/^\[/{s/^scale = .*/scale = 1.0/;}' "$conf_file"
+        if ! ${pkgs.gnugrep}/bin/grep -q "^scale" "$conf_file"; then
+          ${pkgs.gnused}/bin/sed -i '/^\[output\]/ascale = 1.0' "$conf_file"
+        fi
       fi
       ${pkgs.coreutils}/bin/chown greeter:greeter "$conf_file"
       ${pkgs.coreutils}/bin/chmod 0644 "$conf_file"
@@ -105,8 +104,9 @@
     };
   };
 
-  # Auto-unlock GNOME Keyring at login via greetd
+  # Auto-unlock GNOME Keyring at login
   security.pam.services.greetd.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   # XDG Portals
   xdg.portal = {

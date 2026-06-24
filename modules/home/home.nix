@@ -49,6 +49,7 @@
     tldr         # Simplified and community-driven man pages helper
     delta        # Syntax-highlighting pager for git/diffs
     procs        # Modern replacement for ps (processes viewer)
+    cava         # Audio visualizer
   ];
 
   # GTK theme configuration
