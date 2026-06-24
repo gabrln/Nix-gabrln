@@ -29,7 +29,7 @@
       base16-nvim
     ];
 
-    extraLuaConfig = ''
+    initLua = ''
       -- Options
       vim.opt.number = true
       vim.opt.relativenumber = true
