@@ -4,7 +4,7 @@ NixOS config with **MangoWM**, **Noctalia V5**.
 
 ## Branches
 
-| Branch | Kernel | Build Time | Use Case |
+| Branch | Kernel | First Build | Use Case |
 |--------|--------|------------|----------|
 | `stable` | Standard NixOS | ~10-20min | Instalação rápida, uso diário |
 | `experimental` | CachyOS (BORE + AVX2) | ~3h | Performance máxima, gaming |
