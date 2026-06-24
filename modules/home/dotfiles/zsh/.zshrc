@@ -135,7 +135,7 @@ alias gadog="PAGER=\"less -F -X\" git log --all --decorate --oneline --graph"
 
 # Zellij shortcuts
 alias zj="zellij"
-alias zja="zellij attach"
+alias zm="zellij attach main || zellij --session main"
 alias zjl="zellij list-sessions"
 alias zjda="zellij delete-all-sessions --force"
 alias conf-zj="nvim ~/.config/zellij/config.kdl"
