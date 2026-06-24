@@ -6,7 +6,19 @@ NixOS config with **MangoWM**, **Noctalia V5**, **CachyOS kernel**.
 
 > **No Git?** Use `nix-shell -p git` to get a temporary git without installing it system-wide.
 
-### 1. SSH Key (GitHub)
+```bash
+# 1. Clone (HTTPS — no SSH key needed yet)
+git clone -b experimental https://github.com/gabrln/Nix-gabrln.git ~/.config/nixos
+
+# 2. Copy hardware config from the installer
+cp /etc/nixos/hardware-configuration.nix ~/.config/nixos/host/hardware-configuration.nix
+
+# 3. Build
+cd ~/.config/nixos
+nixos-rebuild switch --flake .#gabrln
+```
+
+### SSH Key (opcional, para push)
 
 ```bash
 # Gerar chave SSH (se não existir)
@@ -23,27 +35,17 @@ cat ~/.ssh/id_ed25519.pub
 
 # Testar conexão
 ssh -T git@github.com
-```
 
-### 2. Clone & Build
-
-```bash
-# 1. Clone
-git clone -b experimental git@github.com:gabrln/Nix-gabrln.git ~/.config/nixos
-
-# 2. Copy hardware config from the installer
-cp /etc/nixos/hardware-configuration.nix ~/.config/nixos/host/hardware-configuration.nix
-
-# 3. Build
+# Trocar remote para SSH
 cd ~/.config/nixos
-nixos-rebuild switch --flake .#gabrln
+git remote set-url origin git@github.com:gabrln/Nix-gabrln.git
 ```
 
-### 3. Obsidian Vault
+### Obsidian Vault
 
 ```bash
 # Clonar vault (diretório criado automaticamente pelo NixOS config)
-git clone git@github.com:gabrln/obsidian-vault.git ~/Documents/obsidian
+git clone https://github.com/gabrln/obsidian-vault.git ~/Documents/obsidian
 ```
 
 ## Structure
