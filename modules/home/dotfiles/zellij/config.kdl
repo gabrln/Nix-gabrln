@@ -1,0 +1,88 @@
+// Zellij Configuration
+// Mutable dotfile - changes apply immediately without restart
+
+// UI
+ui {
+    pane_frames {
+        rounded_corners true
+        hide_session_name false
+    }
+    compact_bar true
+    pane_viewport_serialization true
+}
+
+// Keybindings (vi-mode)
+keybindings {
+    unbind "Ctrl o" // Unbind default lock to avoid conflict with MangoWM
+
+    // Session management
+    shared_except "locked" {
+        "Ctrl o" { SwitchToMode "locked"; }
+    }
+
+    locked {
+        "Ctrl o" { SwitchToMode "locked"; }
+    }
+
+    // Ctrl+t prefix for pane/tab operations (avoids MangoWM SUPER conflicts)
+    shared_except "locked" {
+        // Pane splits
+        "Ctrl t" { SwitchToMode "tmux"; }
+    }
+
+    tmux {
+        // Pane navigation (vim-like)
+        "h" { MoveFocus "Left"; }
+        "j" { MoveFocus "Down"; }
+        "k" { MoveFocus "Up"; }
+        "l" { MoveFocus "Right"; }
+
+        // Split panes
+        "d" { NewPane "Down"; SwitchToMode "locked"; }
+        "r" { NewPane "Right"; SwitchToMode "locked"; }
+
+        // Close pane
+        "x" { ClosePane; SwitchToMode "locked"; }
+
+        // Tab management
+        "n" { GoToNextTab; SwitchToMode "locked"; }
+        "p" { GoToPreviousTab; SwitchToMode "locked"; }
+        "c" { NewTab; SwitchToMode "locked"; }
+
+        // Resize mode
+        "s" { SwitchToMode "resize"; }
+
+        // Detach
+        "D" { Detach; SwitchToMode "locked"; }
+
+        // Exit tmux mode
+        Esc { SwitchToMode "locked"; }
+    }
+
+    resize {
+        "h" { Resize "Left"; }
+        "j" { Resize "Down"; }
+        "k" { Resize "Up"; }
+        "l" { Resize "Right"; }
+
+        "=" { Resize "Increase"; }
+        "-" { Resize "Decrease"; }
+
+        Esc { SwitchToMode "locked"; }
+        "Ctrl t" { SwitchToMode "tmux"; }
+    }
+}
+
+// Plugins
+plugins {
+    compact-bar location="zellij:compact-bar"
+}
+
+// Layout
+default_layout "compact"
+default_shell "zsh"
+
+// Options
+scroll_buffer_size 10000
+copy_on_select true
+mouse_mode true
