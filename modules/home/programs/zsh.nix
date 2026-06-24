@@ -47,12 +47,6 @@
     '';
   };
 
-  # Use mutable dotfile for Zsh configuration
-  # This allows instant editing without rebuild
-  xdg.configFile."zsh/.zshrc".source =
-    config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/.config/nixos/modules/home/dotfiles/zsh/.zshrc";
-
   # Ensure config directory exists
   home.activation.ensureConfigDirs = lib.hm.dag.entryBefore [ "writeBoundary" ] ''
     mkdir -p "$HOME/.config/kitty/themes"
