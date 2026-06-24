@@ -4,9 +4,15 @@
   imports = [
     inputs.noctalia.homeModules.default
     inputs.mango.hmModules.mango
-    ./programs
+    ./programs/kitty.nix
+    ./programs/zsh.nix
+    ./programs/yazi.nix
+    ./programs/zellij.nix
+    ./programs/nvim.nix
+    ./programs/git.nix
     ./programs/webapps.nix
-    ./wayland
+    ./wayland/mango.nix
+    ./wayland/noctalia.nix
   ];
 
   # Home Manager identity

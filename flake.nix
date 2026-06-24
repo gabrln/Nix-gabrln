@@ -39,7 +39,10 @@
         inherit system;
         specialArgs = { inherit inputs vars; };
         modules = [
-          ./host/default.nix
+          ./host/boot.nix
+          ./host/services.nix
+          ./host/packages.nix
+          ./host/hardware-configuration.nix
           ./modules/core/base.nix
           ./modules/core/latency.nix
           ./modules/core/audio.nix
