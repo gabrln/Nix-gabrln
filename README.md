@@ -18,13 +18,6 @@ cd ~/.config/nixos
 nixos-rebuild switch --flake .#gabrln
 ```
 
-## Quick Rebuild
-
-```bash
-alias rebuild="cd ~/.config/nixos && sudo nixos-rebuild switch --flake ."
-alias update="cd ~/.config/nixos && nix flake update && sudo nixos-rebuild switch --flake ."
-```
-
 ## Structure
 
 ```
