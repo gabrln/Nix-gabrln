@@ -3,28 +3,12 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./boot.nix
     ./services.nix
     ./packages.nix
   ];
 
-  # 1. Bootloader Settings
-  # Configured for EFI with GRUB bootloader
-  boot = {
-    loader.systemd-boot.enable = false;
-    loader.grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport = true;
-      useOSProber = true;
-      configurationLimit = 3;
-    };
-    loader.efi.canTouchEfiVariables = true;
-
-    # Clean temporary files from the SSD on every boot
-    tmp.cleanOnBoot = true;
-  };
-
-  # 2. Desktop Program Enablements
+  # Desktop Program Enablements
   # Enable MangoWM compositor system module
   programs.mango.enable = true;
 
