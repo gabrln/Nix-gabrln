@@ -27,21 +27,9 @@
       url = "github:noctalia-dev/noctalia-greeter";
     };
 
-    antigravity-nix = {
-      url = "github:jacopone/antigravity-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Opt-in state persistence inputs
-    impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { self, nixpkgs, home-manager, mango, noctalia, noctalia-greeter, antigravity-nix, nixvim, impermanence, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mango, noctalia, noctalia-greeter, ... }@inputs:
     let
       system = "x86_64-linux";
       vars = import ./vars.nix;

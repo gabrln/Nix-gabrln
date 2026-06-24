@@ -4,7 +4,6 @@
   imports = [
     inputs.noctalia.homeModules.default
     inputs.mango.hmModules.mango
-    inputs.nixvim.homeModules.nixvim
     ./programs
     ./programs/webapps.nix
     ./wayland
@@ -89,8 +88,7 @@
   # Default file associations (MIME Types) imported from Vault notes
   xdg.mimeApps = {
     enable = true;
-    defaultApplications = {
-      "x-scheme-handler/antigravity" = "antigravity.desktop";
+      defaultApplications = {
       "inode/directory" = "yazi.desktop";
       "text/plain" = "nvim.desktop";
       "text/markdown" = "nvim.desktop";

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   # 1. Low latency and priority adjustments for RAM/Kernel

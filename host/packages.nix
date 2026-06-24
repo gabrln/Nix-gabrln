@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   # System Packages
@@ -13,15 +13,8 @@
     bazaar
     cage
     firefox
-    (inputs.mango.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (oldAttrs: {
-      postPatch = (oldAttrs.postPatch or "") + ''
-        substituteInPlace src/config/preset.h \
-          --replace '"1", "2", "3", "4", "5", "6", "7", "8", "9",' '"1", "2", "3", "4", "5", "6", "7", "8", "9", "10",'
-      '';
-    })) # MangoWM/mangowc compositor
-    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-no-fhs
-    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-ide-no-fhs
-    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
+    opencode
+    opencode-desktop
     cliphist
     wl-clipboard
     libnotify

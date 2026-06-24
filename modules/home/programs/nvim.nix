@@ -1,54 +1,79 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  programs.nixvim = {
+  programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    withNodeJs = true;
+    withPython3 = true;
 
-    # Enable Wayland clipboard support via wl-copy
-    clipboard.providers.wl-copy.enable = true;
+    extraPackages = with pkgs; [
+      nil
+      bash-language-server
+      ripgrep
+      fd
+    ];
 
-    opts = {
-      # Basics
-      number = true;
-      relativenumber = true;
-      scrolloff = 8;
-      tabstop = 2;
-      shiftwidth = 2;
-      expandtab = true;
-      smartindent = true;
-      wrap = true;
-      ignorecase = true;
-      smartcase = true;
-      termguicolors = true;
-    };
-
-    # Recommended plugins, without autocomplete popups (no nvim-cmp)
-    plugins = {
-      lualine.enable = true;      # Premium status bar
-      bufferline.enable = true;   # View open buffers at the top
-      treesitter.enable = true;   # Smart syntax highlighting
-      telescope.enable = true;    # Fuzzy file and text finder
-      web-devicons.enable = true; # Icons for the interface
-      gitsigns.enable = true;     # Git modification indicators
-      which-key.enable = true;    # Command and shortcut hints on screen
-      comment.enable = true;      # Quickly comment/uncomment lines
-      lsp = {
-        enable = true;
-        servers = {
-          nil_ls.enable = true;   # Official Language Server for Nix
-          bashls.enable = true;   # Language Server for Shell/Bash
-        };
-      };
-    };
-
-    extraPlugins = with pkgs.vimPlugins; [
+    plugins = with pkgs.vimPlugins; [
+      lualine-nvim
+      bufferline-nvim
+      nvim-treesitter
+      telescope-nvim
+      nvim-web-devicons
+      gitsigns-nvim
+      which-key-nvim
+      comment-nvim
+      nvim-lspconfig
       base16-nvim
     ];
 
-    extraConfigLua = ''
+    extraLuaConfig = ''
+      -- Options
+      vim.opt.number = true
+      vim.opt.relativenumber = true
+      vim.opt.scrolloff = 8
+      vim.opt.tabstop = 2
+      vim.opt.shiftwidth = 2
+      vim.opt.expandtab = true
+      vim.opt.smartindent = true
+      vim.opt.wrap = true
+      vim.opt.ignorecase = true
+      vim.opt.smartcase = true
+      vim.opt.termguicolors = true
+
+      -- Treesitter
+      require('nvim-treesitter.configs').setup({
+        ensure_installed = { "nix", "bash", "lua" },
+        auto_install = true,
+        highlight = { enable = true },
+      })
+
+      -- Lualine
+      require('lualine').setup()
+
+      -- Bufferline
+      require('bufferline').setup()
+
+      -- Telescope
+      require('telescope').setup()
+
+      -- Gitsigns
+      require('gitsigns').setup()
+
+      -- Which-key
+      require('which-key').setup()
+
+      -- Comment
+      require('comment').setup()
+
+      -- LSP
+      local lspconfig = require('lspconfig')
+      lspconfig.nil_ls.setup({})
+      lspconfig.bashls.setup({})
+
+      -- Noctalia dynamic theme template
       local ok, matugen = pcall(require, 'matugen')
       if ok then
         matugen.setup()

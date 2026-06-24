@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, vars, ... }:
+{ pkgs, vars, ... }:
 
 {
   # 1. Nix Settings & Flakes

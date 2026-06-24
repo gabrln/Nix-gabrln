@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   # EarlyOOM Daemon to mitigate sudden freezes due to high RAM usage

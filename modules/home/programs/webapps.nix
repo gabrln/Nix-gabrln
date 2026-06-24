@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   fetchFavicon = { name, url, sha256 }: let
     sanitized = builtins.replaceStrings [" "] ["-"] name;

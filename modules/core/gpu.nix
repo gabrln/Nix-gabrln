@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Force loading of the i915 driver in stage 1 boot to prevent screen flickering in MangoWM/Wayland
