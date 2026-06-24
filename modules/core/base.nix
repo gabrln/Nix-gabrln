@@ -57,7 +57,7 @@
   # 3. User Configuration (Gabriel)
   users.users.${vars.userName} = {
     isNormalUser = true;
-    initialPassword = "nixos";
+    initialHashedPassword = "$6$1pFjnI70Pl2rHzgL$80/3xJ6nnvH/tdAQpfzP2oTwD39MvrxK10d/vHmYmLnJsW9nfNwjqmWDgLVH1CHStWlMp5tbs.8nM/vVQPrfL1";
     description = vars.userDescription;
     extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" "docker" ];
     shell = pkgs.zsh;
@@ -81,6 +81,9 @@
       }
     ];
   };
+
+  # Firewall
+  networking.firewall.enable = true;
 
   # Enable nh (Nix Helper) for cleaner and faster rebuilds
   programs.nh = {

@@ -144,12 +144,10 @@
     };
   };
 
-  # Expose theme and icons to Flatpak apps by symlinking them into home directory
+  # Expose theme to Flatpak apps by symlinking them into home directory
   home.file = {
     ".themes/adw-gtk3-dark".source = "${pkgs.adw-gtk3}/share/themes/adw-gtk3-dark";
     ".themes/adw-gtk3".source = "${pkgs.adw-gtk3}/share/themes/adw-gtk3";
-    ".icons/Papirus-Dark".source = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
-    ".icons/Papirus".source = "${pkgs.papirus-icon-theme}/share/icons/Papirus";
   };
 
 

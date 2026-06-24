@@ -86,6 +86,15 @@
     '';
   };
 
+  # SSH
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "no";
+    };
+  };
+
   # Greetd
   services.greetd = {
     enable = true;
