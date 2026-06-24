@@ -1,58 +1,77 @@
-# NixOS Experimental - Dotfiles Diretos
+# Nix-gabrln
 
-Este repositório contém a configuração experimental do NixOS para o usuário `gabrln`, usando **MangoWM + Noctalia + Neovim** com temas dinâmicos.
+NixOS config with **MangoWM**, **Noctalia**, and dynamic theming.
 
-## Instalação mínima do dotfile experimental
+## Installation
 
-1. **Clone a branch `experimental`** em `~/.config/nixos`:
-   ```bash
-   git clone -b experimental https://github.com/gabrln/Nix-gabrln.git ~/.config/nixos
-   ```
+> **Sem Git?** Use `nix-shell -p git` para ter acesso temporário ao git sem instalar nada no sistema.
 
-2. **Copie o hardware real gerado pelo instalador**:
-   ```bash
-   cp /etc/nixos/hardware-configuration.nix ~/.config/nixos/hosts/default/hardware-configuration.nix
-   ```
+```bash
+# 1. Clonar
+git clone -b experimental https://github.com/gabrln/Nix-gabrln.git /home/.config/nixos
 
-3. **Recompile e aplique o sistema**:
-   ```bash
-   cd ~/.config/nixos
-   nixos-rebuild switch --flake .#gabrln
-   ```
+# 2. Copiar hardware do instalador
+cp /etc/nixos/hardware-configuration.nix /home/.config/nixos/host/hardware-configuration.nix
 
-4. **Atualizar no futuro**:
-   ```bash
-   cd ~/.config/nixos
-   git pull origin experimental
-   nixos-rebuild switch --flake .#gabrln
-   ```
-
-## Estrutura atual
-
-```text
-~/.config/nixos
-├── flake.nix
-├── flake.lock
-├── hosts/default/
-│   └── hardware-configuration.nix
-└── modules/
-    ├── core/
-    └── home/
+# 3. Build
+cd /home/.config/nixos
+nixos-rebuild switch --flake .#gabrln
 ```
 
-## O que essa branch entrega
+### Atualizar
 
-- `MangoWM` como gerenciador de janelas Wayland.
-- `Noctalia` para shell, temas dinâmicos e runtime theming.
-- `Neovim` com tema dinâmico via `matugen.lua`.
-- Configuração modular separando `modules/core` e `modules/home`.
+```bash
+cd /home/.config/nixos
+git pull origin experimental
+nixos-rebuild switch --flake .#gabrln
+```
 
-## Como usar
+> O repositório é clonado em `/home/.config/nixos` (fora do home do usuário) — certifique-se de que o path existe e tem permissões corretas.
 
-- Use `experimental` para desenvolvimento e testes.
-- Para migrar para `main`:
-  ```bash
-  git checkout main
-  git pull origin main
-  nixos-rebuild switch --flake .#gabrln
-  ```
+## Estrutura
+
+```
+.
+├── flake.nix              # inputs, outputs, módulos do sistema
+├── vars.nix               # usuário, hostname, locale
+├── host/                  # config da máquina
+│   ├── default.nix        # boot, compositor, XWayland
+│   ├── packages.nix       # pacotes do sistema
+│   ├── services.nix       # earlyoom, flatpak, greetd, portal
+│   └── hardware-configuration.nix  # gerado pelo instalador
+└── modules/
+    ├── core/              # módulos de sistema
+    │   ├── base.nix       # nix settings, rede, usuário, sudo
+    │   ├── audio.nix      # PipeWire tuning
+    │   ├── latency.nix    # ZRAM, swappiness, kernel params
+    │   ├── gpu.nix        # Intel i915, VAAPI
+    │   └── docker.nix     # Docker daemon
+    └── home/              # home-manager
+        ├── home.nix       # identidade, GTK, Qt, MIME, xdg
+        ├── wayland/
+        │   ├── mango.nix  # MangoWM keybinds + scripts
+        │   └── noctalia.nix  # Noctalia shell + templates
+        ├── programs/
+        │   ├── kitty.nix
+        │   ├── zsh.nix
+        │   ├── yazi.nix
+        │   ├── zellij.nix
+        │   ├── nvim.nix
+        │   └── git.nix
+        ├── webapps.nix    # web apps como desktop entries
+        └── dotfiles/      # configs mutáveis (symlinks fora da store)
+```
+
+## Stack
+
+| Camada | Ferramenta |
+|--------|-----------|
+| Compositor | MangoWM |
+| Shell/DE | Noctalia V5 |
+| Terminal | Kitty |
+| Editor | Neovim (nixvim) |
+| File Manager | Yazi |
+| Multiplexer | Zellij |
+| Prompt | Starship |
+| Theme | Noctalia (Catppuccin builtin) |
+| GTK | adw-gtk3-dark + Papirus-Dark |
