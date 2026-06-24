@@ -80,4 +80,7 @@
   # Firewall
   networking.firewall.enable = true;
 
+  # Fallback DNS (Cloudflare + Google)
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+
 }
