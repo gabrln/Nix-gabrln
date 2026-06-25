@@ -79,6 +79,9 @@
     ];
   };
 
+  # nix-ld: allows running dynamically linked binaries (Mason, treesitter parsers, etc.)
+  programs.nix-ld.enable = true;
+
   # Firewall
   networking.firewall.enable = true;
 
