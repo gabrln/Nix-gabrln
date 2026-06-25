@@ -1,20 +1,28 @@
--- Load nixCats utility
-require('nixCatsUtils').setup {
-  non_nix_value = true,
-}
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
--- Load config
 require('config.options')
 require('config.keymaps')
 require('config.autocmds')
 
--- Setup lazy.nvim via nixCats wrapper
-require('nixCatsUtils.lazyCat').setup(
-  nixCats.pawsible { 'allPlugins', 'start', 'lazy.nvim' },
-  {
+-- Find lazy.nvim from nixCats pack directory
+local function find_lazy()
+  local paths = vim.api.nvim_list_runtime_paths()
+  for _, p in ipairs(paths) do
+    if p:find("lazy%.nvim$") then
+      return p
+    end
+  end
+  return nil
+end
+
+local lazy_path = find_lazy()
+if lazy_path then
+  vim.opt.rtp:prepend(lazy_path)
+
+  require("lazy").setup({
     { import = "plugins" },
-  },
-  {
+  }, {
     defaults = { lazy = false },
     install = { colorscheme = { "tokyonight", "habamax" } },
     checker = { enabled = true, notify = false },
@@ -29,8 +37,8 @@ require('nixCatsUtils.lazyCat').setup(
         },
       },
     },
-  }
-)
+  })
+end
 
 -- Noctalia matugen setup
 local function safe_require(name)
@@ -43,8 +51,7 @@ if matugen then
   matugen.setup()
 end
 
--- Signal handler for Noctalia theme reload
-local signal = vim.loop.new_signal()
+local signal = vim.uv.new_signal()
 signal:start('sigusr1', vim.schedule_wrap(function()
   package.loaded['matugen'] = nil
   require('matugen').setup()
