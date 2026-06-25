@@ -22,6 +22,7 @@
     firefox
     opencode
     opencode-desktop
+    mcp-nixos
     cliphist
     wl-clipboard
     libnotify
