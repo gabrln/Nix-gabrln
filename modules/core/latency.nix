@@ -15,8 +15,15 @@
   # Load the i2c-dev driver to allow brightness control via ddcutil
   boot.kernelModules = [ "i2c-dev" ];
 
-  # Enable compressed swap in RAM (ZRAM)
-  zramSwap.enable = true;
+  # Enable compressed swap in RAM via systemd-zram-generator (zstd compression)
+  services.zram-generator.enable = true;
+  services.zram-generator.settings = {
+    zram0 = {
+      "zram-size" = "ram / 2";
+      "compression-algorithm" = "zstd";
+      "fs-type" = "swap";
+    };
+  };
 
   # Enable the I2C bus for monitor hardware control
   hardware.i2c.enable = true;

@@ -49,6 +49,18 @@
 
     # Gaming
     mangohud
+
+    # Monitoring & debugging
+    intel-gpu-tools
+    vkbasalt
+    wlr-randr
+    wdisplays
+    ncdu
+    hyperfine
+    just
+    iotop
+    nethogs
+    powertop
   ];
 
   # Steam expansions
@@ -66,5 +78,10 @@
     QT_QPA_PLATFORMTHEME = "qt6ct";
     NIXOS_OZONE_WL = "1";
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/intel_icd.x86_64.json";
+    # VkBasalt (Contrast Adaptive Sharpening)
+    VK_LAYER_PATH = "${pkgs.vkbasalt}/share/vulkan/implicit_layer.d";
+    ENABLE_VKBASALT = "1";
+    VKBASALT_EFFECTS = "cas";
+    VKBASALT_CAS_SHARPNESS = "0.3";
   };
 }

@@ -30,4 +30,20 @@
     quantum = 256;
     rate = 48000;
   };
+
+  # Explicit PipeWire low-latency config (complements nix-gaming module)
+  services.pipewire.extraConfig.pipewire = {
+    "context.properties" = {
+      "default.clock.rate" = 48000;
+      "default.clock.quantum" = 256;
+      "default.clock.min-quantum" = 64;
+      "default.clock.max-quantum" = 4096;
+    };
+  };
+  services.pipewire.extraConfig.client = {
+    "pipewire.default.quantum" = 256;
+    "pipewire.default.rate" = 48000;
+    "pipewire.min.req" = 128;
+    "pipewire.min.quantum" = 64;
+  };
 }

@@ -15,6 +15,8 @@
     auto-optimise-store = true;
     # Increase the download buffer size to avoid timeouts (512 MB)
     download-buffer-size = 536870912;
+    max-jobs = "auto";
+    cores = 0;
   };
 
   # Automatic garbage collection (weekly, keep last 10 generations)
@@ -82,5 +84,8 @@
 
   # Fallback DNS (Cloudflare + Google)
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+
+  # NVMe I/O scheduler (none = no scheduler, direct to device)
+  hardware.block.defaultScheduler = "none";
 
 }

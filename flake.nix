@@ -51,6 +51,8 @@
           ./modules/core/audio.nix
           ./modules/core/gpu.nix
           ./modules/core/docker.nix
+          ./modules/core/cpu.nix
+          ./modules/core/ananicy.nix
           chaotic.nixosModules.default
           nix-gaming.nixosModules.pipewireLowLatency
           nix-gaming.nixosModules.platformOptimizations

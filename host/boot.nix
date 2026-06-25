@@ -20,8 +20,8 @@
     # Clean temporary files from the SSD on every boot
     tmp.cleanOnBoot = true;
 
-    # CachyOS kernel with BORE scheduler and AVX2 optimizations
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    # Standard NixOS kernel (binary from cache.nixos.org)
+    kernelPackages = pkgs.linuxPackages;
   };
 
   # Desktop Program Enablements
@@ -31,5 +31,12 @@
   programs.xwayland.enable = true;
 
   # GameMode - on-demand CPU/gaming optimizations
-  programs.gamemode.enable = true;
+  programs.gamemode = {
+    enable = true;
+    enableRenice = true;
+    settings.general = {
+      desiredgov = "performance";
+      softrealtime = "auto";
+    };
+  };
 }
