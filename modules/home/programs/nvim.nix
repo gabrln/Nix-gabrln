@@ -12,9 +12,7 @@
     extraPackages = with pkgs; [
       nil
       bash-language-server
-      ripgrep
-      fd
-      git
+      gcc
     ];
   };
 

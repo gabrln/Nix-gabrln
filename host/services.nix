@@ -106,7 +106,6 @@
 
   # Auto-unlock GNOME Keyring at login
   security.pam.services.greetd.enableGnomeKeyring = true;
-  security.pam.services.login.enableGnomeKeyring = true;
 
   # XDG Portals
   xdg.portal = {

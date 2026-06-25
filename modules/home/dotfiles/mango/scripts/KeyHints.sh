@@ -70,14 +70,14 @@ shortcuts=(
 
   # Config
   "[Zsh/Alias] :: conf-nix :: Edit NixOS flake configuration :: nvim ~/.config/nixos/flake.nix"
-  "[Zsh/Alias] :: conf-mango :: Edit MangoWM configuration :: nvim ~/.config/nixos/home/gabrln/wayland/mango.nix"
-  "[Zsh/Alias] :: conf-zsh :: Edit Zsh configuration :: nvim ~/.config/nixos/home/gabrln/programs/zsh.nix"
+  "[Zsh/Alias] :: conf-mango :: Edit MangoWM configuration :: nvim ~/.config/nixos/modules/home/wayland/mango.nix"
+  "[Zsh/Alias] :: conf-zsh :: Edit Zsh configuration :: nvim ~/.config/nixos/modules/home/programs/zsh.nix"
   "[Zsh/Alias] :: conf-zj :: Edit Zellij config :: nvim ~/.config/zellij/config.kdl"
   "[Zsh/Alias] :: reload-zsh :: Reload Zsh configuration :: source ~/.zshrc"
 
   # Nix
-  "[Nix/System] :: rebuild :: Rebuild NixOS switch (alias) :: cd ~/.config/nixos && nh os switch"
-  "[Nix/System] :: update :: Update Nix flake and rebuild (alias) :: cd ~/.config/nixos && nix flake update && nh os switch"
+  "[Nix/System] :: rebuild :: Rebuild NixOS switch (alias) :: cd ~/.config/nixos && sudo nixos-rebuild switch --flake ."
+  "[Nix/System] :: update :: Update Nix flake and rebuild (alias) :: cd ~/.config/nixos && nix flake update && sudo nixos-rebuild switch --flake ."
   "[Nix/System] :: nxi <pkg> :: Install Nix package user-profile :: nix profile install nixpkgs#<pkg>"
   "[Nix/System] :: nxu <pkg> :: Remove Nix package user-profile :: nix profile remove <pkg>"
   "[Nix/System] :: nxl :: List user-profile installed packages :: nix profile list"

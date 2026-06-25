@@ -9,8 +9,6 @@
     ripgrep
     zoxide
     starship
-    kitty
-    libnotify
     jq
   ];
 
@@ -49,7 +47,7 @@
 
   # Ensure config directory exists
   home.activation.ensureConfigDirs = lib.hm.dag.entryBefore [ "writeBoundary" ] ''
-    mkdir -p "$HOME/.config/kitty/themes"
+    mkdir -p "$HOME/.config/mango/scripts"
   '';
 
   # Zoxide (Autojump)

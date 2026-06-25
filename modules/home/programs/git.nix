@@ -12,7 +12,6 @@
         defaultBranch = "experimental";
       };
       pull = {
-        rebase = true;
         ff = "only";
       };
       diff = {

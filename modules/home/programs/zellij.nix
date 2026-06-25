@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 {
   programs.zellij = {
@@ -8,6 +8,6 @@
 
   # Mutable dotfile for Zellij config
   xdg.configFile."zellij/config.kdl".source =
-    lib.file.mkOutOfStoreSymlink
-      "${lib.home.homeDirectory}/.config/nixos/modules/home/dotfiles/zellij/config.kdl";
+    config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/.config/nixos/modules/home/dotfiles/zellij/config.kdl";
 }
