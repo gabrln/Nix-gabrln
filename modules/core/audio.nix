@@ -12,7 +12,7 @@
     }
   ];
 
-  # Audio (PipeWire via nix-gaming low-latency module)
+  # Audio (PipeWire low-latency via explicit config)
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -21,17 +21,7 @@
     pulse.enable = true;
   };
 
-  # nix-gaming PipeWire low-latency module handles:
-  # - quantum, rate, RT scheduling
-  # - PulseAudio min.req/min.quantum/min.frag
-  # - client stream latency and resample quality
-  services.pipewire.lowLatency = {
-    enable = true;
-    quantum = 256;
-    rate = 48000;
-  };
-
-  # Explicit PipeWire low-latency config (complements nix-gaming module)
+  # Explicit PipeWire low-latency config
   services.pipewire.extraConfig.pipewire = {
     "context.properties" = {
       "default.clock.rate" = 48000;
