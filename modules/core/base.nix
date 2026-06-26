@@ -12,7 +12,7 @@
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     ];
-    auto-optimise-store = true;
+
     # Increase the download buffer size to avoid timeouts (512 MB)
     download-buffer-size = 536870912;
     max-jobs = "auto";
@@ -23,7 +23,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 7d";
+    options = "--delete-older-than 14d";
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -56,7 +56,7 @@
     isNormalUser = true;
     initialHashedPassword = "$6$1pFjnI70Pl2rHzgL$80/3xJ6nnvH/tdAQpfzP2oTwD39MvrxK10d/vHmYmLnJsW9nfNwjqmWDgLVH1CHStWlMp5tbs.8nM/vVQPrfL1";
     description = vars.userDescription;
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" "docker" "gamemode" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" "gamemode" ];
     shell = pkgs.zsh;
   };
 
@@ -85,10 +85,28 @@
   # Firewall
   networking.firewall.enable = true;
 
-  # Fallback DNS (Cloudflare + Google)
+  # DNS-over-TLS via systemd-resolved
+  services.resolved = {
+    enable = true;
+    settings = {
+      Resolve = {
+        DNSSEC = "true";
+        DNSOverTLS = "true";
+        FallbackDNS = [ "1.1.1.1#cloudflare-dns.com" "8.8.8.8#dns.google" ];
+      };
+    };
+  };
+
+  # Fallback DNS (plaintext, used when resolved is unavailable)
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
   # NVMe I/O scheduler (none = no scheduler, direct to device)
   hardware.block.defaultScheduler = "none";
+
+  # Automatic weekly system updates for security patches
+  system.autoUpgrade = {
+    enable = true;
+    dates = "weekly";
+  };
 
 }
