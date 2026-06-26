@@ -16,9 +16,8 @@
   # Automatic SSD TRIM
   services.fstrim.enable = true;
 
-  # Systemd limits and timeouts to avoid slow shutdowns (max 10s)
+  # Systemd limits to avoid slow shutdowns (max 10s)
   systemd.settings.Manager = {
-    DefaultTimeoutStartSec = "15s";
     DefaultTimeoutStopSec = "10s";
   };
 
@@ -89,7 +88,8 @@
   services.openssh = {
     enable = true;
     settings = {
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
     };
   };
