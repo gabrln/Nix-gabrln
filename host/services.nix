@@ -10,7 +10,7 @@
 
   # Limit Journald log size to prevent unnecessary writes on SSD
   services.journald.extraConfig = ''
-    SystemMaxUse=50M
+    SystemMaxUse=200M
   '';
 
   # Automatic SSD TRIM
@@ -20,6 +20,10 @@
   systemd.settings.Manager = {
     DefaultTimeoutStopSec = "10s";
   };
+
+  # Firewall: default-deny (whitelist). Steam ports opened via programs.steam.openFirewall
+  # - remotePlay: ports 27036/udp, 27037/tcp
+  # - dedicatedServer: ports 27015/udp, 27016/tcp
 
   # Hardware & Services required by Noctalia / Wayland
   hardware.bluetooth.enable = true;
@@ -46,6 +50,8 @@
         ${pkgs.flatpak}/bin/flatpak override --system --filesystem=xdg-config/gtk-4.0:ro
         ${pkgs.flatpak}/bin/flatpak override --system --filesystem=~/.themes:ro
         ${pkgs.flatpak}/bin/flatpak override --system --filesystem=~/.icons:ro
+        # Install GTK theme metadata inside Flatpak sandbox for dark theme support
+        ${pkgs.flatpak}/bin/flatpak install --system --noninteractive org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark 2>/dev/null || true
       '';
       RemainAfterExit = true;
     };
