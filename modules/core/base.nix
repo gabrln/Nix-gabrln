@@ -42,6 +42,7 @@
     LC_NUMERIC = vars.defaultLocale;
     LC_PAPER = vars.defaultLocale;
     LC_TELEPHONE = vars.defaultLocale;
+    LC_MESSAGES = "en_US.UTF-8";
     LC_TIME = vars.defaultLocale;
   };
 
