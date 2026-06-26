@@ -4,22 +4,15 @@ NixOS config with **MangoWM**, **Noctalia V5**.
 
 ## Branches
 
-| Branch | Kernel | First Build | Use Case |
-|--------|--------|------------|----------|
-| `stable` | Standard NixOS | ~10-20min | Instalação rápida, uso diário |
-| `experimental` | CachyOS (BORE + AVX2) | ~3h | Performance máxima, gaming |
-| `main` | Espelho do `experimental` | — | Branch estável/produção |
+| Branch | Use Case |
+|--------|----------|
+| `experimental` | Desenvolvimento, kernel NixOS padrão, BORE scheduler |
+| `main` | Espelho do `experimental` (estável/produção) |
 
 ```bash
-# Instalação rápida (recomendado)
-git clone -b stable https://github.com/gabrln/Nix-gabrln.git ~/.config/nixos
-
-# Instalação com kernel CachyOS (compile manual)
-git clone -b experimental https://github.com/gabrln/Nix-gabrln.git ~/.config/nixos
-
-# Trocar de branch após clone
+# Instalação
+git clone https://github.com/gabrln/Nix-gabrln.git ~/.config/nixos
 cd ~/.config/nixos
-git checkout stable    # ou experimental
 sudo nixos-rebuild switch --flake .
 ```
 
@@ -29,7 +22,7 @@ sudo nixos-rebuild switch --flake .
 
 ```bash
 # 1. Clone (HTTPS — no SSH key needed yet)
-git clone -b stable https://github.com/gabrln/Nix-gabrln.git ~/.config/nixos
+git clone https://github.com/gabrln/Nix-gabrln.git ~/.config/nixos
 
 # 2. Copy hardware config from the installer
 cp /etc/nixos/hardware-configuration.nix ~/.config/nixos/host/hardware-configuration.nix
@@ -66,13 +59,13 @@ git remote set-url origin git@github.com:gabrln/Nix-gabrln.git
 
 | Layer | Tool |
 |--------|-----------|
-| Kernel | Standard NixOS (`stable`) ou CachyOS (`experimental`) |
+| Kernel | Standard NixOS (BORE) |
 | Compositor | MangoWM |
 | Shell | Noctalia V5 |
-| Audio | PipeWire (nix-gaming low-latency) |
+| Audio | PipeWire (explicit low-latency config) |
 | Gaming | Gamemode, MangoHud, Steam + Gamescope |
 | Terminal | Kitty |
-| Editor | Neovim (LazyVim) |
-| File Manager | Yazi |
+| Editor | Neovim (nvf) |
+| File Manager | Yazi + Nautilus |
 | Multiplexer | Zellij |
-| Prompt | Starship |
+| Prompt | Starship (Noctalia themed) |
