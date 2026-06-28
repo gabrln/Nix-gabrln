@@ -57,7 +57,7 @@
     isNormalUser = true;
     initialHashedPassword = "$6$1pFjnI70Pl2rHzgL$80/3xJ6nnvH/tdAQpfzP2oTwD39MvrxK10d/vHmYmLnJsW9nfNwjqmWDgLVH1CHStWlMp5tbs.8nM/vVQPrfL1";
     description = vars.userDescription;
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" "gamemode" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" "docker" "gamemode" ];
     shell = pkgs.zsh;
   };
 

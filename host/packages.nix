@@ -45,8 +45,7 @@
     unzip
     p7zip
     unrar
-    podman-compose
-    podman-desktop
+    docker-compose
 
     # Gaming
     mangohud
