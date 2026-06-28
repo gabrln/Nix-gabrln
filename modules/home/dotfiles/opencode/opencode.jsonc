@@ -1,11 +1,31 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "instructions": ["/home/gabrln/Documents/obsidian/C04 Agent/Agent Workflow.md"],
+  "skills": {
+    "paths": ["/home/gabrln/.config/nixos/.opencode/skills"]
+  },
   "mcp": {
     "nixos": {
       "type": "local",
       "command": ["mcp-nixos"],
       "enabled": true
     }
+  },
+  "permission": {
+    "bash": {
+      "git *": "allow",
+      "nixos-rebuild *": "allow",
+      "nix flake *": "allow",
+      "mkdir *": "allow",
+      "*": "ask"
+    }
+  },
+  "compaction": {
+    "auto": true,
+    "tail_turns": 25
+  },
+  "tool_output": {
+    "max_lines": 500,
+    "max_bytes": 102400
   }
 }
