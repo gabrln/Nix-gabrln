@@ -35,9 +35,11 @@
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    brave-origin.url = "github:Daniel-42-z/brave-origin-flake";
   };
 
-  outputs = { self, nixpkgs, home-manager, mango, noctalia, noctalia-greeter, chaotic, nix-gaming, nvf, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mango, noctalia, noctalia-greeter, chaotic, nix-gaming, nvf, brave-origin, ... }@inputs:
     let
       system = "x86_64-linux";
       vars = import ./vars.nix;

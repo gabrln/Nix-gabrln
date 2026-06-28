@@ -20,6 +20,7 @@
     bazaar
     cage
     firefox
+    (inputs.brave-origin.packages.${pkgs.stdenv.hostPlatform.system}.default)
     opencode
     opencode-desktop
     mcp-nixos

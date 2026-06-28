@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
   fetchFavicon = { name, url, sha256 }: let
     sanitized = builtins.replaceStrings [" "] ["-"] name;
@@ -11,11 +11,13 @@ let
     };
   in rawIcon;
 
+  brave-origin = inputs.brave-origin.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
   mkWebApp = { name, url, sha256 }: let
     iconPath = fetchFavicon { inherit name url sha256; };
   in {
     inherit name;
-    exec = "${pkgs.brave}/bin/brave --start-maximized --app=${url}";
+    exec = "${brave-origin}/bin/brave-origin --start-maximized --app=${url}";
     icon = "${iconPath}";
     terminal = false;
     type = "Application";
@@ -39,11 +41,4 @@ in {
     name = app.name;
     value = mkWebApp app;
   }) webApps);
-
-  programs.brave = {
-    enable = true;
-    commandLineArgs = [
-      "--enable-features=BraveVerticalTab"
-    ];
-  };
 }

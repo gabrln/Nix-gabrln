@@ -16,6 +16,7 @@
       configurationLimit = 5;
     };
     loader.efi.canTouchEfiVariables = true;
+    loader.timeout = 60;
 
     # Clean temporary files from the SSD on every boot
     tmp.cleanOnBoot = true;
