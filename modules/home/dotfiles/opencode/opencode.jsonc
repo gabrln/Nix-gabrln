@@ -11,7 +11,25 @@
   },
   "agent": {
     "build": {
-      "model": "opencode-go/minimax-m2.7"
+      "model": "opencode-go/minimax-m2.7",
+      "permission": {
+        "edit": "deny",
+        "write": "deny",
+        "bash": {
+          "nix flake *": "allow",
+          "*": "deny"
+        },
+        "task": {
+          "spec": "allow",
+          "design": "allow",
+          "design-review": "allow",
+          "apply": "allow",
+          "verify": "allow",
+          "vault-docs": "allow",
+          "git-specialist": "allow",
+          "*": "deny"
+        }
+      }
     },
     "plan": {
       "model": "opencode-go/deepseek-v4-flash"
@@ -24,13 +42,21 @@
     }
   },
   "command": {
-    "check": {
-      "description": "Roda nix flake check no config repo",
-      "template": "Execute `nix flake check` em ~/.config/nixos e reporte o resultado completo."
+    "plan": {
+      "description": "Inicia spec + design para uma request (Tier 3)",
+      "template": "@spec Analisa e produz spec técnica para: $ARGUMENTS. Após spec completa, delegar para @design."
     },
     "rebuild": {
       "description": "Rebuild + switch do NixOS",
       "template": "Execute `cd ~/.config/nixos && sudo nixos-rebuild switch --flake .#gabrln` e reporte o resultado."
+    },
+    "docs": {
+      "description": "Atualiza documentação do vault",
+      "template": "@vault-docs Verifica e atualiza documentação no vault para: $ARGUMENTS"
+    },
+    "check": {
+      "description": "Roda nix flake check no config repo",
+      "template": "Execute `nix flake check` em ~/.config/nixos e reporte o resultado completo."
     }
   },
   "formatter": {

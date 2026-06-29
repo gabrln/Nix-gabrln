@@ -175,6 +175,11 @@
     mkdir -p "$HOME/Documents/obsidian"
   '';
 
+  # Create .opencode/artifacts/ directory for spec/design artifacts (Tier 3)
+  home.activation.createArtifactsDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "$HOME/.config/nixos/.opencode/artifacts"
+  '';
+
   # Symlink opencode config from dotfile (managed by home-manager)
   xdg.configFile."opencode/opencode.jsonc".source =
     config.lib.file.mkOutOfStoreSymlink

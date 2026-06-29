@@ -6,3 +6,6 @@ result
 AGENTS.md
 .opencode/agents/
 .opencode/skills/
+.opencode/node_modules/
+.opencode/package.json
+.opencode/package-lock.json
