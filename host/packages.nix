@@ -55,6 +55,7 @@
     # Monitoring & debugging
     intel-gpu-tools
     vkbasalt
+    nixfmt
     wlr-randr
     wdisplays
     ncdu

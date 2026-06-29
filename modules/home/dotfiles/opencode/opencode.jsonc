@@ -1,11 +1,43 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "model": "minimax/m2.7",
+  "small_model": "deepseek/v4-flash",
   "instructions": [
     "/home/gabrln/Documents/obsidian/C04 Agent/Agent Workflow.md",
     "/home/gabrln/Documents/obsidian/C04 Agent/Reference/Config Reference.md"
   ],
   "skills": {
     "paths": ["/home/gabrln/Documents/obsidian/C04 Agent/Skills"]
+  },
+  "agent": {
+    "build": {
+      "model": "minimax/m2.7"
+    },
+    "plan": {
+      "model": "deepseek/v4-flash"
+    },
+    "explore": {
+      "model": "deepseek/v4-flash"
+    },
+    "general": {
+      "model": "moonshot-ai/kimi-k2.6"
+    }
+  },
+  "command": {
+    "check": {
+      "description": "Roda nix flake check no config repo",
+      "template": "Execute `nix flake check` em ~/.config/nixos e reporte o resultado completo."
+    },
+    "rebuild": {
+      "description": "Rebuild + switch do NixOS",
+      "template": "Execute `cd ~/.config/nixos && sudo nixos-rebuild switch --flake .#gabrln` e reporte o resultado."
+    }
+  },
+  "formatter": {
+    "nixfmt": {
+      "command": ["nixfmt"],
+      "extensions": [".nix"]
+    }
   },
   "mcp": {
     "nixos": {

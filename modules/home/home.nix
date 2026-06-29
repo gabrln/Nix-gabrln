@@ -175,6 +175,24 @@
     mkdir -p "$HOME/Documents/obsidian"
   '';
 
+  # Symlink opencode config from dotfile (managed by home-manager)
+  xdg.configFile."opencode/opencode.jsonc".source =
+    config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/.config/nixos/modules/home/dotfiles/opencode/opencode.jsonc";
+
+  # Symlink custom agents from vault to opencode's global agents dir
+  # (opencode doesn't support agents.paths config like skills.paths)
+  home.activation.linkVaultAgents = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    vault_agents="$HOME/Documents/obsidian/C04 Agent/Agents"
+    if [ -d "$vault_agents" ]; then
+      mkdir -p "$HOME/.config/opencode/agents"
+      for agent in "$vault_agents"/*.md; do
+        [ -f "$agent" ] || continue
+        ln -sfn "$agent" "$HOME/.config/opencode/agents/$(basename "$agent")"
+      done
+    fi
+  '';
+
   # Enable direnv and nix-direnv for automatic cached development shells
   programs.direnv = {
     enable = true;
