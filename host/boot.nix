@@ -22,6 +22,7 @@
     tmp.cleanOnBoot = true;
 
     # Standard NixOS kernel (binary from cache.nixos.org)
+    # Gaming kernel available via nix-gaming input if needed
     kernelPackages = pkgs.linuxPackages;
   };
 
