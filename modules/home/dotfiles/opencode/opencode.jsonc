@@ -57,7 +57,7 @@
   },
   "compaction": {
     "auto": true,
-    "tail_turns": 25
+    "tail_turns": 50
   },
   "tool_output": {
     "max_lines": 500,
