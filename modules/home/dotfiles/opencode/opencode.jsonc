@@ -3,7 +3,7 @@
   "model": "opencode-go/minimax-m2.7",
   "small_model": "opencode-go/deepseek-v4-flash",
   "instructions": [
-    "/home/gabrln/Documents/obsidian/C04 Agent/Agent Workflow.md",
+    "/home/gabrln/Documents/obsidian/C04 Agent/Agent Workflow (compressed).md",
     "/home/gabrln/Documents/obsidian/C04 Agent/Reference/Config Reference.md"
   ],
   "skills": {
